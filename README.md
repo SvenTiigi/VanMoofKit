@@ -1,7 +1,7 @@
 <br/>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/logo.png?token=GHSAT0AAAAAABVGSLDOMXHVQQSD6CVMKINOY3X3VCQ" alt="logo" width="27%">
+    <img src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/logo.png?token=GHSAT0AAAAAABVGSLDOMXHVQQSD6CVMKINOY3X3VCQ" alt="logo" width="30%">
 </p>
 
 <h1 align="center">
