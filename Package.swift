@@ -31,6 +31,13 @@ let package = Package(
                 "CryptoSwift"
             ],
             path: "Sources"
+        ),
+        .testTarget(
+            name: "VanMoofKitTests",
+            dependencies: [
+                "VanMoofKit"
+            ],
+            path: "Tests"
         )
     ]
 )
