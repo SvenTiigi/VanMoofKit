@@ -3,7 +3,7 @@ import Foundation
 // MARK: - InMemoryVanMoofTokenStore
 
 /// An InMemory based VanMoofTokenStore
-public final class InMemoryVanMoofTokenStore: VanMoofTokenStore, ObservableObject {
+public final class InMemoryVanMoofTokenStore: ObservableObject {
     
     // MARK: Static-Properties
     
@@ -26,11 +26,15 @@ public final class InMemoryVanMoofTokenStore: VanMoofTokenStore, ObservableObjec
         self.token = token
     }
     
-    // MARK: VanMoofTokenStore
+}
+
+// MARK: - VanMoofTokenStore
+
+extension InMemoryVanMoofTokenStore: VanMoofTokenStore {
     
     /// Set VanMoof Token
     /// - Parameter token: The VanMoof Token that should be set
-    public func set(token: VanMoof.Token) {
+    public func set(token: VanMoof.Token) throws {
         self.token = token
     }
     

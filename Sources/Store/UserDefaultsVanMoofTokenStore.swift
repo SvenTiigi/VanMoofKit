@@ -42,9 +42,9 @@ extension UserDefaultsVanMoofTokenStore: VanMoofTokenStore {
     
     /// Set VanMoof Token
     /// - Parameter token: The VanMoof Token that should be set
-    public func set(token: VanMoof.Token) {
+    public func set(token: VanMoof.Token) throws {
         self.userDefaults.set(
-            try? JSONEncoder().encode(token),
+            try JSONEncoder().encode(token),
             forKey: self.userDefaultsKey
         )
     }

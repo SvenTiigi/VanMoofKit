@@ -68,38 +68,55 @@ extension VanMoof.Bike.Details.Permission: Codable {
 
 public extension VanMoof.Bike.Details.Permission {
     
+    /// The `Add User` Permission
     static let addUser = "ADD_USER"
     
+    /// The `Firmware Update` Permission
     static let firmwareUpdates = "FIRMWARE_UPDATES"
     
+    /// The `Remove User` Permission
     static let removeUser = "REMOVE_USER"
     
+    /// The `Report Found` Permission
     static let reportFound = "REPORT_FOUND"
     
+    /// The `Report Stolen` Permission
     static let reportStolen = "REPORT_STOLEN"
     
+    /// The `Send Statistics` Permission
     static let sendStatistics = "SEND_STATISTICS"
     
+    /// The `Backup Code` Permission
     static let backupCode = "BACKUP_CODE"
     
+    /// The `Bike Name` Permission
     static let bikeName = "BIKE_NAME"
     
+    /// The `View Theft Cases` Permission
     static let viewTheftCases = "VIEW_THEFT_CASES"
     
+    /// The `Alarm Settings` Permission
     static let alarmSettings = "ALARM_SETTINGS"
     
+    /// The `Country Settings` Permission
     static let countrySettings = "COUNTRY_SETTINGS"
     
+    /// The `Lights` Permission
     static let lights = "LIGHTS"
     
+    /// The `Motor Support Level` Permission
     static let motorSupportLevel = "MOTOR_SUPPORT_LEVEL"
     
+    /// The `Unlock` Permission
     static let unlock = "UNLOCK"
     
+    /// The `Read Values` Permission
     static let readValues = "READ_VALUES"
     
+    /// The `Stolen Mode` Permission
     static let stolenMode = "STOLEN_MODE"
     
+    /// The `Swap Smart Module` Permission
     static let swapSmartmodule = "SWAP_SMARTMODULE"
     
 }

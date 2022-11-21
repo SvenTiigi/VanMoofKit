@@ -1,7 +1,7 @@
 <br/>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/logo.png?token=GHSAT0AAAAAABVGSLDOFHDYWTAOML4N5OHCY3YCBHA" alt="logo" width="30%">
+    <img src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/logo.png?token=GHSAT0AAAAAABVGSLDPMPVC3DHMVG75WVIQY33Y6YQ" alt="logo" width="30%">
 </p>
 
 <h1 align="center">
@@ -9,11 +9,14 @@
 </h1>
 
 <p align="center">
-    A Swift Package to communicate with a VanMoof S3 Bike.
+    A Swift Package to communicate with a VanMoof S3 & X3 Bike.
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/platform-iOS-F05138" alt="Platform">
+   <a href="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/ci.yml">
+       <img src="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/ci.yml/badge.svg" alt="CI status">
+   </a>
+   <img src="https://img.shields.io/badge/Platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20watchOS-F05138" alt="Platform">
    <a href="https://twitter.com/SvenTiigi/">
       <img src="https://img.shields.io/badge/Twitter-@SvenTiigi-blue.svg?style=flat" alt="Twitter">
    </a>
@@ -25,11 +28,9 @@ import VanMoofKit
 
 let vanMoof = VanMoof()
 
-try await vanMoof.authenticate(
-    using: .init(
-        username: "knight.rider@vanmoof.com",
-        password: "********"
-    )
+try await vanMoof.login(
+    username: "knight.rider@vanmoof.com",
+    password: "********"
 )
 
 let bikes = try await vanMoof.bikes()
@@ -61,6 +62,8 @@ dependencies: [
 ```
 
 Or navigate to your Xcode project then select `Swift Packages`, click the “+” icon and search for `VanMoofKit`.
+
+> Please ensure to add the [`NSBluetoothAlwaysUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription) key to your Info.plist.
 
 ## Usage
 

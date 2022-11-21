@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 
 // MARK: - VanMoof+Bike
@@ -8,16 +9,21 @@ public extension VanMoof {
     @dynamicMemberLookup
     final class Bike: ObservableObject {
         
+        // MARK: Static-Properties
+        
+        /// The default TimeInterval
+        public static var timeoutInterval: TimeInterval = 30
+        
         // MARK: Properties
         
         /// The details of the bike.
         public let details: Details
         
-        /// The Crypto.
-        let crypto: Crypto
+        /// The BluetoothManager
+        lazy var bluetoothManager: BluetoothManager = self.makeBluetoothManager()
         
-        /// The BluetoothPublisher.
-        lazy var bluetoothPublisher = BluetoothPublisher()
+        /// The subscriptions.
+        private var cancellables = Set<AnyCancellable>()
         
         // MARK: Initializer
         
@@ -28,9 +34,52 @@ public extension VanMoof {
             details: Details
         ) {
             self.details = details
-            self.crypto = .init(key: details.key)
         }
         
+    }
+    
+}
+
+// MARK: - Make BluetoothManager
+
+private extension VanMoof.Bike {
+    
+    /// Creates an instance of `BluetoothManager`
+    func makeBluetoothManager() -> BluetoothManager {
+        // Initialize BluetoothManager
+        let bluetoothManager = BluetoothManager(
+            details: self.details
+        )
+        // Subscribe to events
+        bluetoothManager
+            .sink { [weak self] event in
+                switch event {
+                case .didUpdateState,
+                        .didConnectPeripheral,
+                        .didAuthenticatedPeripheral,
+                        .peripheralDidUpdateValueForCharacteristic,
+                        .didFailToConnectPeripheral,
+                        .didDisconnectPeripheral:
+                    // Send object will change
+                    self?.objectWillChange.send()
+                default:
+                    break
+                }
+            }
+            .store(in: &self.cancellables)
+        // Subscribe to isScanning
+        bluetoothManager
+            .central
+            .publisher(for: \.isScanning, options: [.new])
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                // Send object will change
+                self?.objectWillChange.send()
+            }
+            .store(in: &self.cancellables)
+        // Return BluetoothManager
+        return bluetoothManager
     }
     
 }

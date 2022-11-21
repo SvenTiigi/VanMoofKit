@@ -22,21 +22,6 @@ public final class VanMoof: ObservableObject {
     /// The JSONDecoder.
     private let decoder: JSONDecoder
     
-    /// The Token
-    @Published
-    private var token: Token? {
-        didSet {
-            // Check if Token is available
-            if let token = self.token {
-                // Set Token
-                self.tokenStore.set(token: token)
-            } else {
-                // Remove Token
-                self.tokenStore.remove()
-            }
-        }
-    }
-    
     // MARK: Initializer
     
     /// Creates a new instance of `VanMoof`
@@ -58,119 +43,71 @@ public final class VanMoof: ObservableObject {
         self.tokenStore = tokenStore
         self.urlSession = urlSession
         self.decoder = decoder
-        self.token = self.tokenStore.token
     }
     
 }
 
-// MARK: - Is Authentication
+// MARK: - Is Authenticated
 
 public extension VanMoof {
     
-    /// Bool value if user is authenticated
+    /// Bool value if user is authenticated / logged in
     var isAuthenticated: Bool {
-        self.token != nil
+        self.tokenStore.token != nil
     }
     
 }
 
-// MARK: - Authenticate
+// MARK: - Login
 
 public extension VanMoof {
     
-    /// Authenticate using username and password
-    /// - Parameter credentials: The VanMoof Credentials
+    /// Login with username and password
+    /// - Parameters:
+    ///   - username: The username.
+    ///   - password: The password.
     /// - Returns: The VanMoof Token
     @discardableResult
-    func authenticate(
+    func login(
+        username: String,
+        password: String
+    ) async throws -> Token {
+        try await self.login(
+            using: .init(
+                username: username,
+                password: password
+            )
+        )
+    }
+    
+    /// Login using Credentials.
+    /// - Parameter credentials: The VanMoof Credentials.
+    /// - Returns: The VanMoof Token
+    @discardableResult
+    func login(
         using credentials: Credentials
     ) async throws -> Token {
-        // Initialize mutable URLRequest
-        var urlRequest = URLRequest(
-            url: self.url.appendingPathComponent("authenticate")
-        )
-        // Set http method
-        urlRequest.httpMethod = "POST"
-        // Set api key
-        urlRequest.setValue(
-            self.apiKey,
-            forHTTPHeaderField: "Api-Key"
-        )
-        // Set authorization header
-        urlRequest.setValue(
-            [
-                "Basic",
-                Data(
-                    [
-                        credentials.username,
-                        credentials.password
-                    ]
-                    .joined(separator: ":")
-                    .utf8
-                )
-                .base64EncodedString()
-            ]
-            .joined(separator: " "),
-            forHTTPHeaderField: "Authorization"
-        )
         // Perform data task
-        let (data, _) = try await self.urlSession.data(for: urlRequest)
+        let (data, _) = try await self.urlSession.data(
+            for: .init(
+                url: self.url,
+                path: "authenticate",
+                method: "POST",
+                apiKey: self.apiKey,
+                credentials: credentials
+            )
+        )
         // Try to decode token
         let token = try self.decoder.decode(Token.self, from: data)
+        // Set Token
+        try self.tokenStore.set(token: token)
         // Run on MainActor
-        await MainActor.run {
-            // Set token
-            self.token = token
+        await MainActor.run { [weak self] in
+            // Send object will change
+            self?.objectWillChange.send()
         }
         // Return token
         return token
-    }
-    
-}
-
-// MARK: - Refresh Authentication
-
-public extension VanMoof {
-    
-    /// Refresh Authentication
-    /// - Returns: The VanMoof Token
-    @discardableResult
-    func refreshAuthentication() async throws -> Token {
-        // Verify token is available
-        guard let token = self.token else {
-            // Otherwise throw error
-            throw Token.MissingError()
-        }
-        // Initialize mutable URLRequest
-        var urlRequest = URLRequest(
-            url: self.url.appendingPathComponent("token")
-        )
-        // Set http method
-        urlRequest.httpMethod = "POST"
-        // Set authorization header
-        urlRequest.setValue(
-            self.apiKey,
-            forHTTPHeaderField: "Api-Key"
-        )
-        urlRequest.setValue(
-            [
-                "Bearer",
-                token.refreshToken
-            ]
-            .joined(separator: " "),
-            forHTTPHeaderField: "Authorization"
-        )
-        // Perform data task
-        let (data, _) = try await self.urlSession.data(for: urlRequest)
-        // Try to decode token
-        let newToken = try self.decoder.decode(Token.self, from: data)
-        // Run on MainActor
-        await MainActor.run {
-            // Set token
-            self.token = newToken
-        }
-        // Return token
-        return newToken
     }
     
 }
@@ -181,8 +118,10 @@ public extension VanMoof {
     
     /// Logout the user
     func logout() {
-        // Clear token
-        self.token = nil
+        // Remove Token
+        self.tokenStore.remove()
+        // Send object will change
+        self.objectWillChange.send()
     }
     
 }
@@ -195,43 +134,33 @@ public extension VanMoof {
     /// - Returns: The User
     func user() async throws -> User {
         /// Retrieve the VanMoof User
-        /// - Parameter refreshTokenIfNeeded: Bool value if token should be refreshed on a `401` status code
+        /// - Parameter refreshedToken: The optional refreshed Token. Default value `nil`
         func user(
-            refreshTokenIfNeeded: Bool
+            refreshedToken: Token? = nil
         ) async throws -> User {
             // Verify token is available
-            guard let token = self.token else {
+            guard let token = self.tokenStore.token else {
                 // Otherwise throw error
                 throw Token.MissingError()
             }
-            // Initialize mutable URLRequest
-            var urlRequest = URLRequest(
-                url: self.url.appendingPathComponent("getCustomerData?includeBikeDetails")
-            )
-            // Set http method
-            urlRequest.httpMethod = "GET"
-            // Set api key
-            urlRequest.setValue(
-                self.apiKey,
-                forHTTPHeaderField: "Api-Key"
-            )
-            // Set authorization header
-            urlRequest.setValue(
-                [
-                    "Bearer",
-                    token.accessToken
-                ]
-                .joined(separator: " "),
-                forHTTPHeaderField: "Authorization"
-            )
             // Perform data task
-            let (data, response) = try await self.urlSession.data(for: urlRequest)
-            // Check if shoudl refresh token if needed and status code is `401`
-            if refreshTokenIfNeeded, (response as? HTTPURLResponse)?.statusCode == 401 {
-                // Refresh authentication
-                try await self.refreshAuthentication()
-                // Return user without refreshing token again, if needed
-                return try await user(refreshTokenIfNeeded: false)
+            let (data, response) = try await self.urlSession.data(
+                for: .init(
+                    url: self.url,
+                    path: "getCustomerData?includeBikeDetails",
+                    method: "GET",
+                    apiKey: self.apiKey,
+                    token: token.accessToken
+                )
+            )
+            // Check if should refresh the token if needed and status code is `401`
+            if refreshedToken == nil, (response as? HTTPURLResponse)?.statusCode == 401 {
+                // Return user without refreshing token again
+                return try await user(
+                    refreshedToken: self.refresh(
+                        token: token
+                    )
+                )
             }
             /// The ResponseBody
             struct ResponseBody: Codable {
@@ -241,8 +170,8 @@ public extension VanMoof {
             // Try to decode data as ResponseBody to access the user
             return try self.decoder.decode(ResponseBody.self, from: data).data
         }
-        // Return user (refresh token if needed)
-        return try await user(refreshTokenIfNeeded: true)
+        // Return user
+        return try await user()
     }
     
 }
@@ -255,6 +184,96 @@ public extension VanMoof {
     /// - Returns: The Bikes
     func bikes() async throws -> [Bike] {
         try await self.user().bikes
+    }
+    
+}
+
+// MARK: - Refresh Token
+
+public extension VanMoof {
+    
+    /// Refresh Token
+    /// - Parameter token: The VanMoof Token which should be refreshed
+    /// - Returns: The refreshed VanMoof Token
+    @discardableResult
+    func refresh(
+        token: Token
+    ) async throws -> Token {
+        // Perform data task
+        let (data, _) = try await self.urlSession.data(
+            for: .init(
+                url: self.url,
+                path: "token",
+                method: "POST",
+                apiKey: self.apiKey,
+                token: token.refreshToken
+            )
+        )
+        // Try to decode token
+        let newToken = try self.decoder.decode(Token.self, from: data)
+        // Try to set token
+        try self.tokenStore.set(token: token)
+        // Return token
+        return newToken
+    }
+    
+}
+
+// MARK: - URLRequest+init
+
+private extension URLRequest {
+    
+    /// Creates a new instance of `URLRequest`
+    /// - Parameters:
+    ///   - url: The URL.
+    ///   - path: The path.
+    ///   - method: The http method.
+    ///   - apiKey: The API Key.
+    ///   - credentials: The optional VanMoof Credentials. Default value `nil`
+    ///   - token: The optional VanMoof Token value. Default value `nil`
+    init(
+        url: URL,
+        path: String,
+        method: String,
+        apiKey: String,
+        credentials: VanMoof.Credentials? = nil,
+        token: String? = nil
+    ) {
+        self.init(
+            url: url.appendingPathComponent(path)
+        )
+        self.httpMethod = method
+        self.setValue(
+            apiKey,
+            forHTTPHeaderField: "Api-Key"
+        )
+        if let credentials = credentials {
+            self.setValue(
+                [
+                    "Basic",
+                    Data(
+                        [
+                            credentials.username,
+                            credentials.password
+                        ]
+                        .joined(separator: ":")
+                        .utf8
+                    )
+                    .base64EncodedString()
+                ]
+                .joined(separator: " "),
+                forHTTPHeaderField: "Authorization"
+            )
+        } else if let token = token {
+            self.setValue(
+                [
+                    "Bearer",
+                    token
+                ]
+                .joined(separator: " "),
+                forHTTPHeaderField: "Authorization"
+            )
+        }
     }
     
 }

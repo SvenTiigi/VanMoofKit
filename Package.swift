@@ -6,6 +6,9 @@ let package = Package(
     name: "VanMoofKit",
     platforms: [
         .iOS(.v15),
+        .tvOS(.v15),
+        .macOS(.v12),
+        .watchOS(.v9)
     ],
     products: [
         .library(

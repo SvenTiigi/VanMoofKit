@@ -10,7 +10,7 @@ public protocol VanMoofTokenStore {
     
     /// Set VanMoof Token
     /// - Parameter token: The VanMoof Token that should be set
-    func set(token: VanMoof.Token)
+    func set(token: VanMoof.Token) throws
     
     /// Remove VanMoof Token
     func remove()
