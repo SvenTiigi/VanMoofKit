@@ -112,22 +112,6 @@ extension VanMoof.Bike.BluetoothData {
     
 }
 
-// MARK: - VanMoof+Bike+BluetoothData+integerValue
-
-extension VanMoof.Bike.BluetoothData {
-    
-    /// The integer value.
-    var integerValue: Int {
-        .init(
-            self.rawValue
-                .withUnsafeBytes {
-                    $0.load(as: UInt16.self)
-                }
-        )
-    }
-    
-}
-
 // MARK: - VanMoof+Bike+BluetoothData+stringValue
 
 extension VanMoof.Bike.BluetoothData {
@@ -137,6 +121,36 @@ extension VanMoof.Bike.BluetoothData {
         .init(
             decoding: self.rawValue,
             as: UTF8.self
+        )
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+BluetoothData+integerValue
+
+extension VanMoof.Bike.BluetoothData {
+    
+    /// The integer value loaded as `UInt8`
+    var integerValue: Int {
+        self.integerValue(as: UInt8.self)
+    }
+    
+    /// Retrieve integer value
+    /// - Parameters:
+    ///   - offset: The offset, in bytes, into the buffer pointer’s memory at which to begin reading data for the new instance. Default value `0`
+    ///   - type: The type to use for the newly constructed instance.
+    func integerValue<Number: BinaryInteger>(
+        fromByteOffset offset: Int = 0,
+        as type: Number.Type
+    ) -> Int {
+        .init(
+            self.rawValue
+                .withUnsafeBytes {
+                    $0.load(
+                        fromByteOffset: offset,
+                        as: Number.self
+                    )
+                }
         )
     }
     

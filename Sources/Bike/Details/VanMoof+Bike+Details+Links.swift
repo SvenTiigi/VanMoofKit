@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof.Bike.Details {
     
     /// The VanMoof Bike Details Links
-    struct Links: Codable, Hashable {
+    struct Links: Codable, Hashable, Sendable {
         
         // MARK: Properties
         

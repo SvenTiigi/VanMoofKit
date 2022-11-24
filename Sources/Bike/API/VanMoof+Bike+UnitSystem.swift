@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike UnitSystem
-    enum UnitSystem: Int, Codable, Hashable, CaseIterable {
+    enum UnitSystem: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Metric (kilometers)
         case metric
         /// Imperial (miles)

@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike ErrorCode
-    struct ErrorCode: Codable, Hashable {
+    struct ErrorCode: Codable, Hashable, Sendable {
         
         // MARK: Properties
         

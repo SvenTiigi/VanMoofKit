@@ -8,7 +8,7 @@ extension VanMoof.Bike.BluetoothServices.Info {
     enum MotorBatteryStateCharacteristic: VanMoofBikeBluetoothCharacteristic {
         /// The identifier.
         static let id: String = "6ACC5542-E631-4069-944D-B8CA7598AD50"
-        #warning("MotorBatteryStateCharacteristic")
+        #warning("MotorBatteryStateCharacteristic | Read Only")
     }
     
 }

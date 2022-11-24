@@ -6,17 +6,13 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike LightMode
-    enum LightMode: Int, Codable, Hashable, CaseIterable {
+    enum LightMode: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Auto
         case auto
         /// Always on
         case alwaysOn
         /// Off
         case off
-        /// Rear flash
-        case rearFlash
-        /// Rear flash stopped
-        case rearFlashStopped
     }
     
 }

@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike LockState
-    enum LockState: Int, Codable, Hashable, CaseIterable {
+    enum LockState: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Unlocked
         case unlocked
         /// Locked

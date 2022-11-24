@@ -6,13 +6,67 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike SpeedLimit
-    enum SpeedLimit: Int, Codable, Hashable, CaseIterable {
+    enum SpeedLimit: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Europe (EU) | `25 km/h`
         case europe
         /// United States (US) | `32 km/h`
         case unitedStates
         /// Japan (JP) | `24 km/h`
         case japan
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+SpeedLimit+flagEmoji
+
+public extension VanMoof.Bike.SpeedLimit {
+    
+    /// The emoji flag character
+    var flagEmoji: Character {
+        switch self {
+        case .europe:
+            return "🇪🇺"
+        case .unitedStates:
+            return "🇺🇸"
+        case .japan:
+            return "🇯🇵"
+        }
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+SpeedLimit+Alias
+
+public extension VanMoof.Bike.SpeedLimit {
+    
+    /// Europe (EU) | `25 km/h`
+    static let eu: Self = .europe
+    
+    /// United States (US) | `32 km/h`
+    static let us: Self = .unitedStates
+    
+    /// Japan (JP) | `24 km/h`
+    static let jp: Self = .japan
+    
+}
+
+// MARK: - VanMoof+Bike+SpeedLimit+Alias
+
+public extension VanMoof.Bike.SpeedLimit {
+    
+    /// The maximum kilometers per hour (`km/h`)
+    /// - Europe: 25 km/h
+    /// - United States: 32 km/h
+    /// - Japan: 24 km/h
+    var maximumKilometersPerHour: Int {
+        switch self {
+        case .europe:
+            return 25
+        case .unitedStates:
+            return 32
+        case .japan:
+            return 24
+        }
     }
     
 }

@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike BellSound
-    enum BellSound: Int, Codable, Hashable, CaseIterable {
+    enum BellSound: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Sonar
         case sonar = 10
         /// Bell

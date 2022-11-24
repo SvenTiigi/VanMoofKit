@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 
 // MARK: - VanMoof+Bike+ConnectionState
@@ -5,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike ConnectionState
-    enum ConnectionState: String, Codable, Hashable, CaseIterable {
+    enum ConnectionState: String, Codable, Hashable, CaseIterable, Sendable {
         /// Disconnected
         case disconnected
         /// Discovering
@@ -41,6 +42,27 @@ public extension VanMoof.Bike {
         default:
             return .disconnected
         }
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+connectionStatePublisher
+
+public extension VanMoof.Bike {
+    
+    /// A Publisher that emits the current ConnectionState and continue emitting whenever a change occurred.
+    var connectionStatePublisher: AnyPublisher<ConnectionState, Never> {
+        Just(
+            self.connectionState
+        )
+        .merge(
+            with: self.objectWillChange
+                .compactMap { [weak self] in
+                    self?.connectionState
+                }
+        )
+        .removeDuplicates()
+        .eraseToAnyPublisher()
     }
     
 }

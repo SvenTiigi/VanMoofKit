@@ -1,3 +1,4 @@
+import CoreBluetooth
 import Combine
 import Foundation
 
@@ -50,6 +51,22 @@ private extension VanMoof.Bike {
         let bluetoothManager = BluetoothManager(
             details: self.details
         )
+        bluetoothManager
+            .sink { event in
+                switch event {
+                case .didDisconnectPeripheral(_, let error):
+                    guard let bluetoothError = error as? CBError,
+                          bluetoothError.code == .connectionTimeout else {
+                        return
+                    }
+                    Task {
+                        try await self.connect()
+                    }
+                default:
+                    return
+                }
+            }
+            .store(in: &self.cancellables)
         // Subscribe to events
         bluetoothManager
             .sink { [weak self] event in

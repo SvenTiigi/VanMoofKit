@@ -299,7 +299,8 @@ extension VanMoof.Bike.BluetoothManager {
                     let error
                 ) where updatedCoreBluetoothCharacteristic == coreBluetoothCharacteristic:
                     // Check if an error is available
-                    if let error = error {
+                    // which is not instance of `CBATTError.unlikelyError`
+                    if let error = error, (error as? CBATTError)?.code != .unlikelyError {
                         // Throw error
                         throw VanMoof.Bike.Error(
                             underlyingError: error
@@ -402,7 +403,18 @@ extension VanMoof.Bike.BluetoothManager {
                             underlyingError: error
                         )
                     } else {
-                        // Otherwise return out of function
+                        // Delay execution after one second
+                        DispatchQueue.main.asyncAfter(
+                            deadline: .now() + 1
+                        ) { [weak self] in
+                            // Read value
+                            try? self?.connectedPeripheral
+                                .readValue(
+                                    for: updatedCoreBluetoothCharacterstic
+                                )
+                        }
+                        // Return out of function
+                        // as write was successful
                         return
                     }
                 case .didDisconnectPeripheral(_, let error):
@@ -458,8 +470,9 @@ private extension VanMoofBikeBluetoothReadableCharacteristic {
         characteristic: CBCharacteristic,
         crypto: VanMoof.Bike.BluetoothCrypto
     ) throws {
-        // Verify characteristic value is available
-        guard var characteristicValue = characteristic.value else {
+        // Verify characteristic value is available and not empty
+        guard var characteristicValue = characteristic.value,
+              !characteristicValue.isEmpty else {
             // Otherwise throw an error
             throw VanMoof.Bike.Error(
                 errorDescription: "\(Self.self) value unavailable"

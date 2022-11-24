@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof.Bike.Details {
     
     /// A VanMoof Bike Model Color
-    struct ModelColor: Codable, Hashable {
+    struct ModelColor: Codable, Hashable, Sendable {
         
         // MARK: Properties
         

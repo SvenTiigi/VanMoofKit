@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof.Bike.Details {
     
     /// The VanMoof Bike Key
-    struct Key: Codable, Hashable {
+    struct Key: Codable, Hashable, Sendable {
         
         // MARK: Properties
         

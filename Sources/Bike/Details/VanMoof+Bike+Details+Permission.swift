@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof.Bike.Details {
     
     /// A VanMoof Bike Details Permission
-    struct Permission: Hashable {
+    struct Permission: Hashable, Sendable {
         
         // MARK: Properties
         

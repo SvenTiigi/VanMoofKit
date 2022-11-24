@@ -5,22 +5,27 @@ import Foundation
 /// A VanMoof object
 public final class VanMoof: ObservableObject {
     
+    // MARK: Static-Properties
+    
+    /// The default `VanMoof` instance
+    public static var `default` = VanMoof()
+    
     // MARK: Properties
     
     /// The VanMoof API URL.
-    private let url: URL
+    public var url: URL
     
     /// The VanMoof API Key.
-    private let apiKey: String
+    public var apiKey: String
     
     /// The VanMoofTokenStore.
-    private let tokenStore: VanMoofTokenStore
+    public var tokenStore: VanMoofTokenStore
     
     /// The URLSession.
-    private let urlSession: URLSession
+    public var urlSession: URLSession
 
     /// The JSONDecoder.
-    private let decoder: JSONDecoder
+    public var decoder: JSONDecoder
     
     // MARK: Initializer
     

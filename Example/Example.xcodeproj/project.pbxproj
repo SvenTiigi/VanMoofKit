@@ -10,21 +10,80 @@
 		3D1DF7652928E7BD0025191B /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1DF7642928E7BD0025191B /* LoginForm.swift */; };
 		3D1DF7672928E7CC0025191B /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1DF7662928E7CC0025191B /* DashboardView.swift */; };
 		3D1DF7692928E9680025191B /* BikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1DF7682928E9680025191B /* BikeView.swift */; };
+		3D62EB1D292E374D00F5DB4E /* Color+foregroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62EB1C292E374D00F5DB4E /* Color+foregroundColor.swift */; };
+		3D8F491B292E04CB00336A4D /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8F491A292E04CB00336A4D /* AppShortcuts.swift */; };
+		3D94DD9C292E6CCA00744B15 /* SetSpeedLimitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DD9B292E6CCA00744B15 /* SetSpeedLimitIntent.swift */; };
+		3D94DD9E292E6F0E00744B15 /* BikeAppEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DD9D292E6F0E00744B15 /* BikeAppEntity.swift */; };
+		3D94DDA0292E6FDD00744B15 /* BikeAppEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DD9F292E6FDD00744B15 /* BikeAppEntityQuery.swift */; };
+		3D94DDA2292E719900744B15 /* VanMoof+User+current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DDA1292E719900744B15 /* VanMoof+User+current.swift */; };
+		3D94DDA4292E737700744B15 /* SpeedLimitAppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DDA3292E737700744B15 /* SpeedLimitAppEnum.swift */; };
+		3D94DDAC292E934C00744B15 /* App+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DDAB292E934C00744B15 /* App+ViewModel.swift */; };
+		3DBFED52292F5E3300ED3FE1 /* BikeView+LockStateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFED51292F5E3300ED3FE1 /* BikeView+LockStateCard.swift */; };
+		3DBFED54292F661300ED3FE1 /* BikeView+FirmwareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFED53292F661300ED3FE1 /* BikeView+FirmwareCard.swift */; };
+		3DBFED56292F6DFA00ED3FE1 /* PowerLevelAppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFED55292F6DFA00ED3FE1 /* PowerLevelAppEnum.swift */; };
+		3DBFED58292F6E9E00ED3FE1 /* SetPowerLevelIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFED57292F6E9E00ED3FE1 /* SetPowerLevelIntent.swift */; };
+		3DC34286292CFB540001388F /* BikeView+Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC34285292CFB540001388F /* BikeView+Card.swift */; };
+		3DC3428A292D0B050001388F /* BikeView+BatteryLevelCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC34289292D0B050001388F /* BikeView+BatteryLevelCard.swift */; };
+		3DC3428C292D0C810001388F /* BikeView+SpeedLimitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3428B292D0C810001388F /* BikeView+SpeedLimitCard.swift */; };
+		3DC3428E292D182E0001388F /* BikeView+LightModeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3428D292D182E0001388F /* BikeView+LightModeCard.swift */; };
+		3DC34290292D194B0001388F /* BikeView+BellSoundCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3428F292D194B0001388F /* BikeView+BellSoundCard.swift */; };
+		3DC34292292D4BE50001388F /* BikeView+ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC34291292D4BE50001388F /* BikeView+ConnectionView.swift */; };
+		3DC34294292D76420001388F /* BikeView+PowerLevelCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC34293292D76420001388F /* BikeView+PowerLevelCard.swift */; };
+		3DC34296292D78B70001388F /* BikeView+PlaySoundCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC34295292D78B70001388F /* BikeView+PlaySoundCard.swift */; };
 		3DDB27112928D6D800A9A5D2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB27102928D6D800A9A5D2 /* App.swift */; };
 		3DDB27132928D6D800A9A5D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB27122928D6D800A9A5D2 /* ContentView.swift */; };
 		3DDB27152928D6D900A9A5D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DDB27142928D6D900A9A5D2 /* Assets.xcassets */; };
 		3DDB27212928D7B300A9A5D2 /* VanMoofKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDB27202928D7B300A9A5D2 /* VanMoofKit */; };
+		3DE5FF46292CBE230091AC99 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE5FF45292CBE230091AC99 /* SettingsView.swift */; };
+		3DE5FF49292CC3D10091AC99 /* Color+accentForegroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE5FF48292CC3D10091AC99 /* Color+accentForegroundColor.swift */; };
+		3DF07F362930023C000E6BA1 /* GetBatteryLevelIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF07F352930023C000E6BA1 /* GetBatteryLevelIntent.swift */; };
+		3DF07F38293003D6000E6BA1 /* GetSpeedLimitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF07F37293003D6000E6BA1 /* GetSpeedLimitIntent.swift */; };
+		3DF07F3B2930044B000E6BA1 /* SpeedLimitSnippetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF07F3A2930044B000E6BA1 /* SpeedLimitSnippetView.swift */; };
+		3DF07F3D293004A1000E6BA1 /* BatteryLevelSnippetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF07F3C293004A1000E6BA1 /* BatteryLevelSnippetView.swift */; };
+		3DF07F3F293006BD000E6BA1 /* SetSpeedLimitAndPowerLevelIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF07F3E293006BD000E6BA1 /* SetSpeedLimitAndPowerLevelIntent.swift */; };
+		3DF07F41293006E7000E6BA1 /* GetPowerLevelIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF07F40293006E7000E6BA1 /* GetPowerLevelIntent.swift */; };
+		3DF07F43293008D4000E6BA1 /* PowerLevelSnippetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF07F42293008D4000E6BA1 /* PowerLevelSnippetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3D1DF7642928E7BD0025191B /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		3D1DF7662928E7CC0025191B /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		3D1DF7682928E9680025191B /* BikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeView.swift; sourceTree = "<group>"; };
+		3D62EB1C292E374D00F5DB4E /* Color+foregroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+foregroundColor.swift"; sourceTree = "<group>"; };
+		3D8F491A292E04CB00336A4D /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
+		3D8F491E292E10B400336A4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D94DD9B292E6CCA00744B15 /* SetSpeedLimitIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSpeedLimitIntent.swift; sourceTree = "<group>"; };
+		3D94DD9D292E6F0E00744B15 /* BikeAppEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeAppEntity.swift; sourceTree = "<group>"; };
+		3D94DD9F292E6FDD00744B15 /* BikeAppEntityQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeAppEntityQuery.swift; sourceTree = "<group>"; };
+		3D94DDA1292E719900744B15 /* VanMoof+User+current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VanMoof+User+current.swift"; sourceTree = "<group>"; };
+		3D94DDA3292E737700744B15 /* SpeedLimitAppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedLimitAppEnum.swift; sourceTree = "<group>"; };
+		3D94DDAB292E934C00744B15 /* App+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+ViewModel.swift"; sourceTree = "<group>"; };
+		3DBFED51292F5E3300ED3FE1 /* BikeView+LockStateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+LockStateCard.swift"; sourceTree = "<group>"; };
+		3DBFED53292F661300ED3FE1 /* BikeView+FirmwareCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+FirmwareCard.swift"; sourceTree = "<group>"; };
+		3DBFED55292F6DFA00ED3FE1 /* PowerLevelAppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerLevelAppEnum.swift; sourceTree = "<group>"; };
+		3DBFED57292F6E9E00ED3FE1 /* SetPowerLevelIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPowerLevelIntent.swift; sourceTree = "<group>"; };
+		3DC34285292CFB540001388F /* BikeView+Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+Card.swift"; sourceTree = "<group>"; };
+		3DC34289292D0B050001388F /* BikeView+BatteryLevelCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+BatteryLevelCard.swift"; sourceTree = "<group>"; };
+		3DC3428B292D0C810001388F /* BikeView+SpeedLimitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+SpeedLimitCard.swift"; sourceTree = "<group>"; };
+		3DC3428D292D182E0001388F /* BikeView+LightModeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+LightModeCard.swift"; sourceTree = "<group>"; };
+		3DC3428F292D194B0001388F /* BikeView+BellSoundCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+BellSoundCard.swift"; sourceTree = "<group>"; };
+		3DC34291292D4BE50001388F /* BikeView+ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+ConnectionView.swift"; sourceTree = "<group>"; };
+		3DC34293292D76420001388F /* BikeView+PowerLevelCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+PowerLevelCard.swift"; sourceTree = "<group>"; };
+		3DC34295292D78B70001388F /* BikeView+PlaySoundCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BikeView+PlaySoundCard.swift"; sourceTree = "<group>"; };
 		3DDB270D2928D6D800A9A5D2 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDB27102928D6D800A9A5D2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		3DDB27122928D6D800A9A5D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3DDB27142928D6D900A9A5D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DDB271E2928D7AA00A9A5D2 /* VanMoofKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = VanMoofKit; path = ..; sourceTree = "<group>"; };
+		3DE5FF45292CBE230091AC99 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3DE5FF48292CC3D10091AC99 /* Color+accentForegroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+accentForegroundColor.swift"; sourceTree = "<group>"; };
+		3DF07F352930023C000E6BA1 /* GetBatteryLevelIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBatteryLevelIntent.swift; sourceTree = "<group>"; };
+		3DF07F37293003D6000E6BA1 /* GetSpeedLimitIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpeedLimitIntent.swift; sourceTree = "<group>"; };
+		3DF07F3A2930044B000E6BA1 /* SpeedLimitSnippetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedLimitSnippetView.swift; sourceTree = "<group>"; };
+		3DF07F3C293004A1000E6BA1 /* BatteryLevelSnippetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryLevelSnippetView.swift; sourceTree = "<group>"; };
+		3DF07F3E293006BD000E6BA1 /* SetSpeedLimitAndPowerLevelIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSpeedLimitAndPowerLevelIntent.swift; sourceTree = "<group>"; };
+		3DF07F40293006E7000E6BA1 /* GetPowerLevelIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPowerLevelIntent.swift; sourceTree = "<group>"; };
+		3DF07F42293008D4000E6BA1 /* PowerLevelSnippetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerLevelSnippetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +98,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D62EB1B292E30D200F5DB4E /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				3DC34285292CFB540001388F /* BikeView+Card.swift */,
+				3DBFED51292F5E3300ED3FE1 /* BikeView+LockStateCard.swift */,
+				3DC34289292D0B050001388F /* BikeView+BatteryLevelCard.swift */,
+				3DC3428B292D0C810001388F /* BikeView+SpeedLimitCard.swift */,
+				3DC3428D292D182E0001388F /* BikeView+LightModeCard.swift */,
+				3DC3428F292D194B0001388F /* BikeView+BellSoundCard.swift */,
+				3DC34293292D76420001388F /* BikeView+PowerLevelCard.swift */,
+				3DC34295292D78B70001388F /* BikeView+PlaySoundCard.swift */,
+				3DBFED53292F661300ED3FE1 /* BikeView+FirmwareCard.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		3D94DDA5292E799800744B15 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				3D94DD9D292E6F0E00744B15 /* BikeAppEntity.swift */,
+				3D94DDA3292E737700744B15 /* SpeedLimitAppEnum.swift */,
+				3DBFED55292F6DFA00ED3FE1 /* PowerLevelAppEnum.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		3D94DDA8292E79F400744B15 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				3D94DD9F292E6FDD00744B15 /* BikeAppEntityQuery.swift */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
 		3DDB27042928D6D800A9A5D2 = {
 			isa = PBXGroup;
 			children = (
@@ -61,7 +154,10 @@
 			isa = PBXGroup;
 			children = (
 				3DDB27102928D6D800A9A5D2 /* App.swift */,
+				3D94DDAB292E934C00744B15 /* App+ViewModel.swift */,
+				3DE5FF3E292CBC480091AC99 /* Shortcuts */,
 				3DDB27222928D86100A9A5D2 /* Views */,
+				3DE5FF47292CC3C40091AC99 /* Extensions */,
 				3DDB27232928D86700A9A5D2 /* Resources */,
 			);
 			path = Example;
@@ -78,9 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				3DDB27122928D6D800A9A5D2 /* ContentView.swift */,
-				3D1DF7662928E7CC0025191B /* DashboardView.swift */,
-				3D1DF7682928E9680025191B /* BikeView.swift */,
-				3D1DF7642928E7BD0025191B /* LoginForm.swift */,
+				3DE5FF41292CBE050091AC99 /* Login */,
+				3DE5FF42292CBE0A0091AC99 /* Dashboard */,
+				3DE5FF43292CBE110091AC99 /* Bike */,
+				3DE5FF44292CBE1C0091AC99 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -89,8 +186,80 @@
 			isa = PBXGroup;
 			children = (
 				3DDB27142928D6D900A9A5D2 /* Assets.xcassets */,
+				3D8F491E292E10B400336A4D /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3DE5FF3E292CBC480091AC99 /* Shortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				3D8F491A292E04CB00336A4D /* AppShortcuts.swift */,
+				3D94DDA8292E79F400744B15 /* Queries */,
+				3D94DDA5292E799800744B15 /* Entities */,
+				3DF07F3929300438000E6BA1 /* SnippetViews */,
+				3D94DD9B292E6CCA00744B15 /* SetSpeedLimitIntent.swift */,
+				3DBFED57292F6E9E00ED3FE1 /* SetPowerLevelIntent.swift */,
+				3DF07F3E293006BD000E6BA1 /* SetSpeedLimitAndPowerLevelIntent.swift */,
+				3DF07F352930023C000E6BA1 /* GetBatteryLevelIntent.swift */,
+				3DF07F37293003D6000E6BA1 /* GetSpeedLimitIntent.swift */,
+				3DF07F40293006E7000E6BA1 /* GetPowerLevelIntent.swift */,
+			);
+			path = Shortcuts;
+			sourceTree = "<group>";
+		};
+		3DE5FF41292CBE050091AC99 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3D1DF7642928E7BD0025191B /* LoginForm.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3DE5FF42292CBE0A0091AC99 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				3D1DF7662928E7CC0025191B /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		3DE5FF43292CBE110091AC99 /* Bike */ = {
+			isa = PBXGroup;
+			children = (
+				3D1DF7682928E9680025191B /* BikeView.swift */,
+				3DC34291292D4BE50001388F /* BikeView+ConnectionView.swift */,
+				3D62EB1B292E30D200F5DB4E /* Cards */,
+			);
+			path = Bike;
+			sourceTree = "<group>";
+		};
+		3DE5FF44292CBE1C0091AC99 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3DE5FF45292CBE230091AC99 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3DE5FF47292CC3C40091AC99 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3DE5FF48292CC3D10091AC99 /* Color+accentForegroundColor.swift */,
+				3D62EB1C292E374D00F5DB4E /* Color+foregroundColor.swift */,
+				3D94DDA1292E719900744B15 /* VanMoof+User+current.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3DF07F3929300438000E6BA1 /* SnippetViews */ = {
+			isa = PBXGroup;
+			children = (
+				3DF07F3A2930044B000E6BA1 /* SpeedLimitSnippetView.swift */,
+				3DF07F3C293004A1000E6BA1 /* BatteryLevelSnippetView.swift */,
+				3DF07F42293008D4000E6BA1 /* PowerLevelSnippetView.swift */,
+			);
+			path = SnippetViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,9 +335,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D1DF7692928E9680025191B /* BikeView.swift in Sources */,
+				3DC3428A292D0B050001388F /* BikeView+BatteryLevelCard.swift in Sources */,
+				3D62EB1D292E374D00F5DB4E /* Color+foregroundColor.swift in Sources */,
+				3DC3428C292D0C810001388F /* BikeView+SpeedLimitCard.swift in Sources */,
+				3DF07F3B2930044B000E6BA1 /* SpeedLimitSnippetView.swift in Sources */,
+				3D94DDA0292E6FDD00744B15 /* BikeAppEntityQuery.swift in Sources */,
 				3DDB27132928D6D800A9A5D2 /* ContentView.swift in Sources */,
+				3DC34290292D194B0001388F /* BikeView+BellSoundCard.swift in Sources */,
+				3DF07F38293003D6000E6BA1 /* GetSpeedLimitIntent.swift in Sources */,
+				3DF07F3F293006BD000E6BA1 /* SetSpeedLimitAndPowerLevelIntent.swift in Sources */,
+				3DC3428E292D182E0001388F /* BikeView+LightModeCard.swift in Sources */,
+				3DE5FF49292CC3D10091AC99 /* Color+accentForegroundColor.swift in Sources */,
+				3DBFED58292F6E9E00ED3FE1 /* SetPowerLevelIntent.swift in Sources */,
+				3DE5FF46292CBE230091AC99 /* SettingsView.swift in Sources */,
+				3DC34294292D76420001388F /* BikeView+PowerLevelCard.swift in Sources */,
+				3D94DDA2292E719900744B15 /* VanMoof+User+current.swift in Sources */,
+				3DC34296292D78B70001388F /* BikeView+PlaySoundCard.swift in Sources */,
 				3D1DF7672928E7CC0025191B /* DashboardView.swift in Sources */,
+				3DF07F41293006E7000E6BA1 /* GetPowerLevelIntent.swift in Sources */,
+				3DF07F3D293004A1000E6BA1 /* BatteryLevelSnippetView.swift in Sources */,
+				3D94DDAC292E934C00744B15 /* App+ViewModel.swift in Sources */,
+				3DC34292292D4BE50001388F /* BikeView+ConnectionView.swift in Sources */,
+				3DBFED52292F5E3300ED3FE1 /* BikeView+LockStateCard.swift in Sources */,
+				3DBFED56292F6DFA00ED3FE1 /* PowerLevelAppEnum.swift in Sources */,
 				3D1DF7652928E7BD0025191B /* LoginForm.swift in Sources */,
+				3D94DD9E292E6F0E00744B15 /* BikeAppEntity.swift in Sources */,
+				3D94DD9C292E6CCA00744B15 /* SetSpeedLimitIntent.swift in Sources */,
+				3DF07F43293008D4000E6BA1 /* PowerLevelSnippetView.swift in Sources */,
+				3D8F491B292E04CB00336A4D /* AppShortcuts.swift in Sources */,
+				3DF07F362930023C000E6BA1 /* GetBatteryLevelIntent.swift in Sources */,
+				3DC34286292CFB540001388F /* BikeView+Card.swift in Sources */,
+				3D94DDA4292E737700744B15 /* SpeedLimitAppEnum.swift in Sources */,
+				3DBFED54292F661300ED3FE1 /* BikeView+FirmwareCard.swift in Sources */,
 				3DDB27112928D6D800A9A5D2 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -280,7 +478,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -301,6 +499,9 @@
 				DEVELOPMENT_TEAM = 9PL44RX378;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Example/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VanMoofKit;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Communicating with your VanMoof Bike over Bluetooth";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -331,6 +532,9 @@
 				DEVELOPMENT_TEAM = 9PL44RX378;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Example/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VanMoofKit;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Communicating with your VanMoof Bike over Bluetooth";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

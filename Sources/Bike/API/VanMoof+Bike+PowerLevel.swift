@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike PowerLevel
-    enum PowerLevel: Int, Codable, Hashable, CaseIterable {
+    enum PowerLevel: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Off
         case off
         /// Level 1
@@ -20,6 +20,21 @@ public extension VanMoof.Bike {
         /// Maximum (Level 5)
         case maximum
     }
+    
+}
+
+// MARK: - VanMoof+Bike+PowerLevel+Alias
+
+public extension VanMoof.Bike.PowerLevel {
+    
+    /// Zero (Off)
+    static let zero: Self = .off
+    
+    /// Maximum (Level 5)
+    static let max: Self = .maximum
+    
+    /// Maximum (Level 5)
+    static let five: Self = .maximum
     
 }
 

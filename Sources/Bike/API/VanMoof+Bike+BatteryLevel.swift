@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 
 // MARK: - VanMoof+Bike+batteryLevel
@@ -16,6 +17,26 @@ public extension VanMoof.Bike {
             )
             .batteryLevel
         }
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+batteryLevelPublisher
+
+public extension VanMoof.Bike {
+    
+    /// A Publisher that emits the battery level whenever a change occurred.
+    var batteryLevelPublisher: AnyPublisher<Int, Never> {
+        self.bluetoothManager
+            .publisher(
+                for: BluetoothServices
+                    .Info
+                    .MotorBatteryLevelCharacteristic
+                    .self
+            )
+            .map(\.batteryLevel)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
     
 }

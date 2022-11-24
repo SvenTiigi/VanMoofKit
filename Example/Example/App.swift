@@ -1,3 +1,4 @@
+import AppIntents
 import SwiftUI
 import VanMoofKit
 
@@ -5,19 +6,7 @@ import VanMoofKit
 
 /// The App
 @main
-struct App {
-    
-    /// The VanMoof object
-    let vanMoof = VanMoof(
-        // Specify in which way the VanMoof Token should be stored.
-        // Available implementations:
-        //  - UserDefaultsVanMoofTokenStore (UserDefaults)
-        //  - UbiquitousVanMoofTokenStore (NSUbiquitousKeyValueStore)
-        //  - InMemoryVanMoofTokenStore (InMemory)
-        tokenStore: UserDefaultsVanMoofTokenStore()
-    )
-    
-}
+struct App {}
 
 // MARK: - SwiftUI.App
 
@@ -27,7 +16,8 @@ extension App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(self.vanMoof)
+                .environmentObject(ViewModel.default)
+                .environmentObject(ViewModel.default.vanMoof)
         }
     }
     

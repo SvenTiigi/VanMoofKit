@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike Sound
-    enum Sound: Int, Codable, Hashable, CaseIterable {
+    enum Sound: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Scrolling Tone
         case scrollingTone = 1
         /// Beep Negative

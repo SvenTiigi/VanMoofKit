@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike ModuleState
-    enum ModuleState: Int, Codable, Hashable, CaseIterable {
+    enum ModuleState: Int, Codable, Hashable, CaseIterable, Sendable {
         /// On
         case on
         /// Off
@@ -86,6 +86,17 @@ public extension VanMoof.Bike {
                         moduleState: moduleState
                     )
             )
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+wakeUp
+
+public extension VanMoof.Bike {
+    
+    /// Wake up bike by setting the `ModuleState` to `on`
+    func wakeUp() async throws {
+        try await self.set(moduleState: .on)
     }
     
 }

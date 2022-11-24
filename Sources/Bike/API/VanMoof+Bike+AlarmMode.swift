@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike AlarmMode
-    enum AlarmMode: Int, Codable, Hashable, CaseIterable {
+    enum AlarmMode: Int, Codable, Hashable, CaseIterable, Sendable {
         /// Disarmed
         case disarmed = 0
         /// Armed
