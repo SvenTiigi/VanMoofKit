@@ -25,7 +25,6 @@
 <img align="right" width="307" src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/example-app.png?token=GHSAT0AAAAAABVGSLDOUPUN7DW7VVXJQIYYY4AAXCA" alt="Example application">
 
 ```swift
-import Foundation
 import VanMoofKit
 
 let vanMoof = VanMoof()
