@@ -1,7 +1,7 @@
 <br/>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/logo.png?token=GHSAT0AAAAAABVGSLDPMPVC3DHMVG75WVIQY33Y6YQ" alt="logo" width="30%">
+    <img src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/logo.png?token=GHSAT0AAAAAABVGSLDOINSWHT3UNKL6NFIYY4AAW2Q" alt="logo" width="30%">
 </p>
 
 <h1 align="center">
@@ -22,6 +22,8 @@
    </a>
 </p>
 
+<img align="right" width="307" src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/example-app.png?token=GHSAT0AAAAAABVGSLDOUPUN7DW7VVXJQIYYY4AAXCA" alt="Example application">
+
 ```swift
 import Foundation
 import VanMoofKit
@@ -37,7 +39,7 @@ let bikes = try await vanMoof.bikes()
 
 for bike in bikes {
     try await bike.connect()
-    try await bike.play(sound: .bell)
+    try await bike.playSound()
 }
 ```
 
