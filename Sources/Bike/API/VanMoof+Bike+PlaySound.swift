@@ -74,10 +74,10 @@ public extension VanMoof.Bike {
     
     /// Play a Sound.
     /// - Parameters:
-    ///   - sound: The Sound which should be played. Default value `.scrollingTone`
+    ///   - sound: The Sound which should be played.
     ///   - count: The number of times the Sound should be played. Default value `1`
     func play(
-        sound: Sound = .scrollingTone,
+        sound: Sound,
         count: Int = 1
     ) async throws {
         try await self.bluetoothManager.write(
@@ -89,6 +89,19 @@ public extension VanMoof.Bike {
                     sound: .init(sound.rawValue),
                     count: .init(count)
                 )
+        )
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+playSound
+
+public extension VanMoof.Bike {
+    
+    /// Play a `scrollingTone` Sound.
+    func playSound() async throws {
+        try await self.play(
+            sound: .scrollingTone
         )
     }
     
