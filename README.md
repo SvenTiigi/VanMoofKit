@@ -9,7 +9,7 @@
 </h1>
 
 <p align="center">
-    A Swift Package to communicate with a VanMoof S3 & X3 Bike.
+    A Swift Package to communicate with a VanMoof S3 & X3 Bike 🚲
 </p>
 
 <p align="center">
