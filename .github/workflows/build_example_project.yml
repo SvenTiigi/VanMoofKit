@@ -1,6 +1,7 @@
 name: Build Example Project
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'Example/**'
