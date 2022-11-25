@@ -32,15 +32,15 @@ jobs:
             -derivedDataPath ../DerivedData
       - name: Process Archive
         run: |
-          mkdir docs
+          mkdir _site
           $(xcrun --find docc) process-archive \
             transform-for-static-hosting ../DerivedData/Build/Products/Debug-iphoneos/VanMoofKit.doccarchive \
-            --output-path docs \
+            --output-path _site \
             --hosting-base-path VanMoofKit
       - name: Create Custom index.html
         run: |
-          rm docs/index.html
-          cat > docs/index.html <<- EOM
+          rm _site/index.html
+          cat > _site/index.html <<- EOM
           <!DOCTYPE html>
           <html>
             <head>
