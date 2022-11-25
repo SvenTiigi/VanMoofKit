@@ -148,7 +148,7 @@ vanMoof.logout()
 
 > Note: Logging out an user has no effect on any available VanMoof.Bike instance. It is the developer responsibility to terminate any open connection to a VanMoof.Bike.
 
-### Bike
+### Bike 🚲
 
 ### Details
 
