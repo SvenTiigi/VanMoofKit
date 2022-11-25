@@ -36,7 +36,7 @@ jobs:
           $(xcrun --find docc) process-archive \
             transform-for-static-hosting ../DerivedData/Build/Products/Debug-iphoneos/VanMoofKit.doccarchive \
             --output-path _site \
-            --hosting-base-path /
+            --hosting-base-path VanMoofKit
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
 
