@@ -5,13 +5,11 @@ on:
     paths:
       - 'Sources/**'
       - 'Tests/**'
-      - '.github/workflows/**'
       - '!Sources/VanMoofKit/Documentation.docc/**'
   pull_request:
     paths:
       - 'Sources/**'
       - 'Tests/**'
-      - '.github/workflows/**'
       - '!Sources/VanMoofKit/Documentation.docc/**'
 
 jobs:
