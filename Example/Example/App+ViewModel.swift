@@ -50,9 +50,12 @@ extension App.ViewModel {
     
     /// Setup ViewModel
     func setup() {
+        // Verify user has not been loaded
         guard self.user == nil else {
+            // Otherwise setup has already been performed
             return
         }
+        // Load User
         Task {
             try await self.loadUser()
         }
@@ -66,7 +69,18 @@ extension App.ViewModel {
     
     /// Reset ViewModel
     func reset() {
+        // Disconnect all bikes
+        try? self.user?
+            .get()
+            .bikes
+            .forEach { bike in
+                Task {
+                    try await bike.disconnect()
+                }
+            }
+        // Clear user
         self.user = nil
+        // Clear selected bike id
         self.selectedBikeId = nil
     }
     
