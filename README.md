@@ -84,6 +84,11 @@ Or navigate to your Xcode project then select `Swift Packages`, click the â€œ+â€
 
 As the VanMoofKit is using the [`CoreBluetooth`](https://developer.apple.com/documentation/corebluetooth) framework to establish a [BLE](https://wikipedia.org/wiki/Bluetooth_Low_Energy) connection to a bike the [`NSBluetoothAlwaysUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription) key needs to be added to the Info.plist of your application.
 
+```xml
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>Establishing a bluetooth connection to your VanMoof Bike.</string>
+```
+
 ### VanMoof
 
 To retrieve bikes of a VanMoof account you first need to initialize an instance of `VanMoof`.
