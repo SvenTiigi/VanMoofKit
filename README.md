@@ -9,7 +9,7 @@
 </h1>
 
 <p align="center">
-    A Swift Package to communicate with a VanMoof S3 & X3 Bike.
+    A Swift Package to communicate with a VanMoof S3 & X3 Bike 🚲
 </p>
 
 <p align="center">
@@ -84,6 +84,11 @@ Or navigate to your Xcode project then select `Swift Packages`, click the “+�
 
 As the VanMoofKit is using the [`CoreBluetooth`](https://developer.apple.com/documentation/corebluetooth) framework to establish a [BLE](https://wikipedia.org/wiki/Bluetooth_Low_Energy) connection to a bike the [`NSBluetoothAlwaysUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription) key needs to be added to the Info.plist of your application.
 
+```xml
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>Establishing a bluetooth connection to your VanMoof Bike.</string>
+```
+
 ### VanMoof
 
 To retrieve bikes of a VanMoof account you first need to initialize an instance of `VanMoof`.
@@ -143,7 +148,7 @@ vanMoof.logout()
 
 > Note: Logging out an user has no effect on any available VanMoof.Bike instance. It is the developer responsibility to terminate any open connection to a VanMoof.Bike.
 
-### Bike
+### Bike 🚲
 
 ### Details
 
@@ -392,6 +397,7 @@ let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 
 - [CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift)
 - [pymoof](https://github.com/quantsini/pymoof)
+- [vanbike-lib](https://github.com/Poket-Jony/vanbike-lib)
 - [Mooovy](https://github.com/mjarkk/vanmoof-web-controller)
 
 ## License
