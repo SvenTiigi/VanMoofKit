@@ -5,7 +5,7 @@ import Foundation
 extension VanMoof.Bike {
     
     /// A VanMoof Bike Bluetooth byte buffer.
-    struct BluetoothData: Codable, Hashable {
+    struct BluetoothData: Codable, Hashable, Sendable {
         
         // MARK: Properties
         

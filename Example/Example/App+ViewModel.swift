@@ -101,7 +101,7 @@ extension App.ViewModel {
                     self.selectedBikeId = user.bikes.first?.id
                 }
                 // Update AppShortcut Parameters
-                AppShortcuts.updateAppShortcutParameters()
+                App.updateAppShortcutParameters()
             }
         }
         // Return user or throw an error

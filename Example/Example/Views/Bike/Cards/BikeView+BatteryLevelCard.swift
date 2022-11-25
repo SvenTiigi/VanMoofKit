@@ -32,15 +32,15 @@ extension BikeView.BatteryLevelCard: View {
             },
             publisher: self.bike.batteryLevelPublisher,
             content: { batteryLevel in
-                Gauge(value: Double(batteryLevel), in: 0...100) {
-                    Text(verbatim: "%")
+                Gauge(value: Double(batteryLevel.level), in: 0...100) {
+                    Text(verbatim: batteryLevel.unitSymbol)
                 } currentValueLabel: {
-                    Text(verbatim: "\(batteryLevel) %")
+                    Text(verbatim: batteryLevel.formatted())
                 }
                 .scaleEffect(1.4)
                 .gaugeStyle(.accessoryCircularCapacity)
                 .tint({
-                    switch batteryLevel {
+                    switch batteryLevel.level {
                     case ...20:
                         return .red
                     case ..<50:
@@ -57,7 +57,7 @@ extension BikeView.BatteryLevelCard: View {
                         if self.isCharging {
                             return "battery.100.bolt"
                         }
-                        switch batteryLevel {
+                        switch batteryLevel.level {
                         case ...1:
                             return "battery.0"
                         case ...25:

@@ -5,7 +5,7 @@ import Foundation
 extension VanMoof.Bike {
  
     /// The VanMoof Bike Bluetooth Services
-    enum BluetoothServices {}
+    enum BluetoothServices: Hashable, Sendable {}
     
 }
 

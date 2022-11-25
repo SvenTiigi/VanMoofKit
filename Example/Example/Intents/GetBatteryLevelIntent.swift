@@ -38,8 +38,8 @@ extension GetBatteryLevelIntent: AppIntent {
                 try await bike.batteryLevel
             }
         return .result(
-            value: batteryLevel,
-            dialog: "Battery level is \(batteryLevel) %",
+            value: batteryLevel.level,
+            dialog: "Battery level is \(batteryLevel.formatted())",
             view: BatteryLevelSnippetView(batteryLevel: batteryLevel)
         )
     }

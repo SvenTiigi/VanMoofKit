@@ -13,7 +13,7 @@ public final class VanMoof: ObservableObject {
     // MARK: Properties
     
     /// The VanMoof API URL.
-    public var url: URL
+    public var apiURL: URL
     
     /// The VanMoof API Key.
     public var apiKey: String
@@ -31,19 +31,19 @@ public final class VanMoof: ObservableObject {
     
     /// Creates a new instance of `VanMoof`
     /// - Parameters:
-    ///   - url: The VanMoof API URL. Default value `"https://my.vanmoof.com/api/v8"`
+    ///   - apiURL: The VanMoof API URL. Default value `"https://my.vanmoof.com/api/v8"`
     ///   - apiKey: The VanMoof API Key. Default value `fcb38d47-f14b-30cf-843b-26283f6a5819`
     ///   - tokenStore: The VanMoofTokenStore. Default value `UserDefaultsVanMoofTokenStore()`
     ///   - urlSession: The URLSession. Default value `.shared`
     ///   - decoder: The JSONDecoder. Default value `.init()`
     public init(
-        url: URL = .init(string: "https://my.vanmoof.com/api/v8")!,
+        apiURL: URL = .init(string: "https://my.vanmoof.com/api/v8")!,
         apiKey: String = "fcb38d47-f14b-30cf-843b-26283f6a5819",
         tokenStore: VanMoofTokenStore = UserDefaultsVanMoofTokenStore(),
         urlSession: URLSession = .shared,
         decoder: JSONDecoder = .init()
     ) {
-        self.url = url
+        self.apiURL = apiURL
         self.apiKey = apiKey
         self.tokenStore = tokenStore
         self.urlSession = urlSession
@@ -95,11 +95,11 @@ public extension VanMoof {
         // Perform data task
         let (data, _) = try await self.urlSession.data(
             for: .init(
-                url: self.url,
-                path: "authenticate",
-                method: "POST",
+                url: self.apiURL,
+                path: .authenticate,
+                method: .post,
                 apiKey: self.apiKey,
-                credentials: credentials
+                authorization: .basic(credentials)
             )
         )
         // Try to decode token
@@ -151,11 +151,11 @@ public extension VanMoof {
             // Perform data task
             let (data, response) = try await self.urlSession.data(
                 for: .init(
-                    url: self.url,
-                    path: "getCustomerData?includeBikeDetails",
-                    method: "GET",
+                    url: self.apiURL,
+                    path: .customerData,
+                    method: .get,
                     apiKey: self.apiKey,
-                    token: token.accessToken
+                    authorization: .bearerToken(token.accessToken)
                 )
             )
             // Check if should refresh the token if needed and status code is `401`
@@ -207,11 +207,11 @@ public extension VanMoof {
         // Perform data task
         let (data, _) = try await self.urlSession.data(
             for: .init(
-                url: self.url,
-                path: "token",
-                method: "POST",
+                url: self.apiURL,
+                path: .token,
+                method: .post,
                 apiKey: self.apiKey,
-                token: token.refreshToken
+                authorization: .bearerToken(token.refreshToken)
             )
         )
         // Try to decode token
@@ -228,31 +228,53 @@ public extension VanMoof {
 
 private extension URLRequest {
     
+    /// A HTTP method
+    enum HTTPMethod: String {
+        /// GET
+        case get = "GET"
+        /// POST
+        case post = "POST"
+    }
+    
+    /// A Path
+    enum Path: String {
+        case authenticate
+        case customerData = "getCustomerData?includeBikeDetails"
+        case token
+    }
+    
+    /// The Authorization
+    enum Authorization {
+        /// Basic Authorization using VanMoof Credentials
+        case basic(VanMoof.Credentials)
+        /// Bearer Token
+        case bearerToken(String)
+    }
+    
     /// Creates a new instance of `URLRequest`
     /// - Parameters:
     ///   - url: The URL.
-    ///   - path: The path.
-    ///   - method: The http method.
+    ///   - path: The Path.
+    ///   - method: The HTTPMethod.
     ///   - apiKey: The API Key.
-    ///   - credentials: The optional VanMoof Credentials. Default value `nil`
-    ///   - token: The optional VanMoof Token value. Default value `nil`
+    ///   - authorization: The Authorization.
     init(
         url: URL,
-        path: String,
-        method: String,
+        path: Path,
+        method: HTTPMethod,
         apiKey: String,
-        credentials: VanMoof.Credentials? = nil,
-        token: String? = nil
+        authorization: Authorization
     ) {
         self.init(
-            url: url.appendingPathComponent(path)
+            url: url.appendingPathComponent(path.rawValue)
         )
-        self.httpMethod = method
+        self.httpMethod = method.rawValue
         self.setValue(
             apiKey,
             forHTTPHeaderField: "Api-Key"
         )
-        if let credentials = credentials {
+        switch authorization {
+        case .basic(let credentials):
             self.setValue(
                 [
                     "Basic",
@@ -269,7 +291,7 @@ private extension URLRequest {
                 .joined(separator: " "),
                 forHTTPHeaderField: "Authorization"
             )
-        } else if let token = token {
+        case .bearerToken(let token):
             self.setValue(
                 [
                     "Bearer",

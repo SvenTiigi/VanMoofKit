@@ -50,23 +50,28 @@ public extension VanMoof.Bike.SpeedLimit {
     
 }
 
-// MARK: - VanMoof+Bike+SpeedLimit+Alias
+// MARK: - VanMoof+Bike+SpeedLimit+measurement
 
 public extension VanMoof.Bike.SpeedLimit {
-    
-    /// The maximum kilometers per hour (`km/h`)
+
+    /// The measurement of the SpeedLimit
     /// - Europe: 25 km/h
     /// - United States: 32 km/h
     /// - Japan: 24 km/h
-    var maximumKilometersPerHour: Int {
-        switch self {
-        case .europe:
-            return 25
-        case .unitedStates:
-            return 32
-        case .japan:
-            return 24
-        }
+    var measurement: Measurement<UnitSpeed> {
+        .init(
+            value: {
+                switch self {
+                case .europe:
+                    return 25
+                case .unitedStates:
+                    return 32
+                case .japan:
+                    return 24
+                }
+            }(),
+            unit: .kilometersPerHour
+        )
     }
     
 }

@@ -11,7 +11,6 @@
 		3D1DF7672928E7CC0025191B /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1DF7662928E7CC0025191B /* DashboardView.swift */; };
 		3D1DF7692928E9680025191B /* BikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1DF7682928E9680025191B /* BikeView.swift */; };
 		3D62EB1D292E374D00F5DB4E /* Color+foregroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62EB1C292E374D00F5DB4E /* Color+foregroundColor.swift */; };
-		3D8F491B292E04CB00336A4D /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8F491A292E04CB00336A4D /* AppShortcuts.swift */; };
 		3D94DD9C292E6CCA00744B15 /* SetSpeedLimitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DD9B292E6CCA00744B15 /* SetSpeedLimitIntent.swift */; };
 		3D94DD9E292E6F0E00744B15 /* BikeAppEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DD9D292E6F0E00744B15 /* BikeAppEntity.swift */; };
 		3D94DDA0292E6FDD00744B15 /* BikeAppEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94DD9F292E6FDD00744B15 /* BikeAppEntityQuery.swift */; };
@@ -50,7 +49,6 @@
 		3D1DF7662928E7CC0025191B /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		3D1DF7682928E9680025191B /* BikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeView.swift; sourceTree = "<group>"; };
 		3D62EB1C292E374D00F5DB4E /* Color+foregroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+foregroundColor.swift"; sourceTree = "<group>"; };
-		3D8F491A292E04CB00336A4D /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
 		3D8F491E292E10B400336A4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D94DD9B292E6CCA00744B15 /* SetSpeedLimitIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSpeedLimitIntent.swift; sourceTree = "<group>"; };
 		3D94DD9D292E6F0E00744B15 /* BikeAppEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeAppEntity.swift; sourceTree = "<group>"; };
@@ -155,8 +153,8 @@
 			children = (
 				3DDB27102928D6D800A9A5D2 /* App.swift */,
 				3D94DDAB292E934C00744B15 /* App+ViewModel.swift */,
-				3DE5FF3E292CBC480091AC99 /* Shortcuts */,
 				3DDB27222928D86100A9A5D2 /* Views */,
+				3DE5FF3E292CBC480091AC99 /* Intents */,
 				3DE5FF47292CC3C40091AC99 /* Extensions */,
 				3DDB27232928D86700A9A5D2 /* Resources */,
 			);
@@ -191,10 +189,9 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		3DE5FF3E292CBC480091AC99 /* Shortcuts */ = {
+		3DE5FF3E292CBC480091AC99 /* Intents */ = {
 			isa = PBXGroup;
 			children = (
-				3D8F491A292E04CB00336A4D /* AppShortcuts.swift */,
 				3D94DDA8292E79F400744B15 /* Queries */,
 				3D94DDA5292E799800744B15 /* Entities */,
 				3DF07F3929300438000E6BA1 /* SnippetViews */,
@@ -205,7 +202,7 @@
 				3DF07F37293003D6000E6BA1 /* GetSpeedLimitIntent.swift */,
 				3DF07F40293006E7000E6BA1 /* GetPowerLevelIntent.swift */,
 			);
-			path = Shortcuts;
+			path = Intents;
 			sourceTree = "<group>";
 		};
 		3DE5FF41292CBE050091AC99 /* Login */ = {
@@ -362,7 +359,6 @@
 				3D94DD9E292E6F0E00744B15 /* BikeAppEntity.swift in Sources */,
 				3D94DD9C292E6CCA00744B15 /* SetSpeedLimitIntent.swift in Sources */,
 				3DF07F43293008D4000E6BA1 /* PowerLevelSnippetView.swift in Sources */,
-				3D8F491B292E04CB00336A4D /* AppShortcuts.swift in Sources */,
 				3DF07F362930023C000E6BA1 /* GetBatteryLevelIntent.swift in Sources */,
 				3DC34286292CFB540001388F /* BikeView+Card.swift in Sources */,
 				3D94DDA4292E737700744B15 /* SpeedLimitAppEnum.swift in Sources */,

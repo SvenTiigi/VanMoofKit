@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof {
     
     /// The VanMoof Credentials
-    struct Credentials: Codable, Hashable {
+    struct Credentials: Codable, Hashable, Sendable {
         
         // MARK: Properties
         

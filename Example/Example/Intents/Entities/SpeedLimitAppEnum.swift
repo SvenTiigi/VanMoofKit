@@ -27,13 +27,13 @@ extension SpeedLimitAppEnum: AppEnum {
     /// A dictionary that maps each value to the visual elements that reperesent it.
     public static let caseDisplayRepresentations: [Self : DisplayRepresentation] = [
         .europe: .init(
-            title: "Europe (25 km/h)"
+            title: "Europe (\(VanMoof.Bike.SpeedLimit.europe.measurement.formatted())"
         ),
         .unitedStates: .init(
-            title: "United States (32 km/h)"
+            title: "United States (\(VanMoof.Bike.SpeedLimit.unitedStates.measurement.formatted())"
         ),
         .japan: .init(
-            title: "Japan (24 km/h)"
+            title: "Japan (\(VanMoof.Bike.SpeedLimit.japan.measurement.formatted()))"
         )
     ]
     

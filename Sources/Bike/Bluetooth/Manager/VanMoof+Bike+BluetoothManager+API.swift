@@ -287,10 +287,10 @@ extension VanMoof.Bike.BluetoothManager {
         try self.connectedPeripheral.readValue(for: coreBluetoothCharacteristic)
         // Perform with timeout
         return try await self.withTimeout(seconds: timeoutInterval) {
-            // Check central state
-            try self.central.checkState()
             // For each bluetooth event
             for try await event in self.values {
+                // Check central state
+                try self.central.checkState()
                 // Switch on event
                 switch event {
                 case .peripheralDidUpdateValueForCharacteristic(
@@ -385,10 +385,10 @@ extension VanMoof.Bike.BluetoothManager {
         }
         // Perform with timeout
         try await self.withTimeout(seconds: timeoutInterval) {
-            // Check central state
-            try self.central.checkState()
             // For each bluetooth event
             for try await event in self.values {
+                // Check central state
+                try self.central.checkState()
                 // Switch on event
                 switch event {
                 case .peripheralDidWriteValueForCharacteristic(

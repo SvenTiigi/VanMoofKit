@@ -3,7 +3,7 @@ import Foundation
 // MARK: - VanMoofBikeBluetoothCharacteristic
 
 /// A VanMoof Bike Bluetooth Characteristic type
-protocol VanMoofBikeBluetoothCharacteristic {
+protocol VanMoofBikeBluetoothCharacteristic: Sendable {
     
     /// The identifier.
     static var id: String { get }

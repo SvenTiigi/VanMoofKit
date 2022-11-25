@@ -1,4 +1,5 @@
 import SwiftUI
+import VanMoofKit
 
 // MARK: - BatteryLevelSnippetView
 
@@ -6,7 +7,7 @@ import SwiftUI
 struct BatteryLevelSnippetView {
     
     /// The battery level
-    let batteryLevel: Int
+    let batteryLevel: VanMoof.Bike.BatteryLevel
     
 }
 
@@ -16,15 +17,15 @@ extension BatteryLevelSnippetView: View {
     
     /// The content and behavior of the view.
     var body: some View {
-        Gauge(value: Double(self.batteryLevel), in: 0...100) {
-            Text(verbatim: "%")
+        Gauge(value: Double(self.batteryLevel.level), in: 0...100) {
+            Text(verbatim: self.batteryLevel.unitSymbol)
         } currentValueLabel: {
-            Text(verbatim: "\(self.batteryLevel) %")
+            Text(verbatim: self.batteryLevel.formatted())
         }
         .scaleEffect(1.4)
         .gaugeStyle(.accessoryCircularCapacity)
         .tint({
-            switch self.batteryLevel {
+            switch self.batteryLevel.level {
             case ...20:
                 return .red
             case ..<50:

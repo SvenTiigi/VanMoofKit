@@ -32,7 +32,7 @@ public extension VanMoof.Bike {
 extension VanMoof.Bike.ErrorCode: ExpressibleByIntegerLiteral {
     
     /// Creates a new instance of `VanMoof.Bike.ErrorCode`
-    /// - Parameter value: The value
+    /// - Parameter value: The integer literal value
     public init(
         integerLiteral value: Int
     ) {

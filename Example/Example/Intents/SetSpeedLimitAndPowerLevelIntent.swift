@@ -61,7 +61,7 @@ extension SetSpeedLimitAndPowerLevelIntent: AppIntent {
             }
         return .result(
             value: self.bikeEntity,
-            dialog: "Speed limit set to \(speedLimit.maximumKilometersPerHour) km/h and power level to \(self.powerLevel.localizedStringResource)"
+            dialog: "Speed limit set to \(speedLimit.measurement.formatted()) and power level to \(self.powerLevel.localizedStringResource)"
         ) {
             HStack {
                 SpeedLimitSnippetView(speedLimit: speedLimit)

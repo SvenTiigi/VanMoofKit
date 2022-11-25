@@ -6,7 +6,7 @@ import Foundation
 extension VanMoof.Bike {
     
     /// The VanMoof Bike Bluetooth Crypto.
-    struct BluetoothCrypto {
+    struct BluetoothCrypto: Codable, Hashable, Sendable {
         
         /// The Key.
         let key: Details.Key

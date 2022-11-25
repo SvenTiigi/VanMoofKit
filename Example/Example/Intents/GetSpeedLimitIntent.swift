@@ -48,7 +48,7 @@ extension GetSpeedLimitIntent: AppIntent {
                     return .japan
                 }
             }(),
-            dialog: "Speed limit is set to \(speedLimit.maximumKilometersPerHour) km/h",
+            dialog: "Speed limit is set to \(speedLimit.measurement.formatted())",
             view: SpeedLimitSnippetView(speedLimit: speedLimit)
         )
     }

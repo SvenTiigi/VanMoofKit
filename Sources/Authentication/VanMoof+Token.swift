@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof {
     
     /// A VanMoof Token
-    struct Token: Hashable {
+    struct Token: Hashable, Sendable {
         
         // MARK: Properties
         

@@ -31,12 +31,12 @@ extension BikeView.SpeedLimitCard: View {
             publisher: self.bike.speedLimitPublisher,
             content: { speedLimit in
                 Gauge(
-                    value: Double(speedLimit.maximumKilometersPerHour),
+                    value: speedLimit.measurement.value,
                     in: 0...37
                 ) {
-                    Text(verbatim: "km/h")
+                    Text(verbatim: speedLimit.measurement.unit.symbol)
                 } currentValueLabel: {
-                    Text(verbatim: .init(speedLimit.maximumKilometersPerHour))
+                    Text(verbatim: .init(Int(speedLimit.measurement.value)))
                 }
                 .scaleEffect(1.4)
                 .gaugeStyle(.accessoryCircular)
@@ -51,7 +51,7 @@ extension BikeView.SpeedLimitCard: View {
                     } label: {
                         Label {
                             Text(
-                                verbatim: "\(speedLimit.localizedString) (\(speedLimit.maximumKilometersPerHour) km/h)"
+                                verbatim: "\(speedLimit.localizedString) (\(speedLimit.measurement.formatted()))"
                             )
                         } icon: {
                             if currentSpeedLimit == speedLimit {

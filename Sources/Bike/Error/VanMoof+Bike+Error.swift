@@ -5,7 +5,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike Error
-    struct Error: Foundation.LocalizedError {
+    struct Error: Foundation.LocalizedError, Sendable {
         
         // MARK: Properties
         

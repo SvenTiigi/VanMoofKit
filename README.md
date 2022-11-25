@@ -1,7 +1,7 @@
 <br/>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/logo.png?token=GHSAT0AAAAAABVGSLDOINSWHT3UNKL6NFIYY4AAW2Q" alt="logo" width="30%">
+    <img src="Assets/logo.png" alt="logo" width="30%">
 </p>
 
 <h1 align="center">
@@ -13,8 +13,8 @@
 </p>
 
 <p align="center">
-   <a href="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/ci.yml">
-       <img src="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/ci.yml/badge.svg" alt="CI status">
+   <a href="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml">
+       <img src="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml/badge.svg" alt="Build and Test Status">
    </a>
    <img src="https://img.shields.io/badge/Platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20watchOS-F05138" alt="Platform">
    <a href="https://twitter.com/SvenTiigi/">
@@ -22,7 +22,7 @@
    </a>
 </p>
 
-<img align="right" width="307" src="https://raw.githubusercontent.com/SvenTiigi/VanMoofKit/gh-pages/readme-assets/example-app.png?token=GHSAT0AAAAAABVGSLDOUPUN7DW7VVXJQIYYY4AAXCA" alt="Example application">
+<img align="right" width="307" src="Assets/example-app.png" alt="Example application">
 
 ```swift
 import VanMoofKit
@@ -81,15 +81,6 @@ To retrieve bikes of a VanMoof account you first need to initialize an instance 
 
 ```swift
 let vanMoof = VanMoof()
-```
-
-The VanMoof API url and key are prefilled with default values which you can easily adjust, if needed.
-
-```swift
-let vanMoof = VanMoof(
-    url: .init(string: "https://my.vanmoof.com/api/v8"),
-    apiKey: "..."
-)
 ```
 
 To authenticate simply call the `login` function on instance of a `VanMoof` object.

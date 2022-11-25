@@ -49,7 +49,7 @@ extension SetSpeedLimitIntent: AppIntent {
             }
         return .result(
             value: self.bikeEntity,
-            dialog: "Speed limit set to \(speedLimit.maximumKilometersPerHour) km/h",
+            dialog: "Speed limit set to \(speedLimit.measurement.formatted())",
             view: SpeedLimitSnippetView(speedLimit: speedLimit)
         )
     }

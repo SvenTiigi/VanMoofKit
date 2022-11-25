@@ -4,15 +4,21 @@ import Foundation
 
 public extension VanMoof.Bike {
     
-    /// Executes an operation to a connected VanMoof Bike
+    /// Executes an `operation` on a connected VanMoof Bike.
+    /// If the bike is currently not connected this function will establish a communication to ensure the `operation`
+    /// always gets executed on a connected `VanMoof.Bike` instance.
+    /// After the operation has finished the bike gets disconnected if it wasn't previously not connected
+    /// or by setting the `shouldDisconnectAfterOperationFinished` to `true`.
     /// - Parameters:
-    ///   - resultType: The result type.
-    ///   - operation: A closure performing an operation on the connected VanMoof Bike.
+    ///   - resultType: The operation result type. Default value `OperationResult.self`
+    ///   - shouldDisconnectAfterOperationFinished: The result type. Default value `false`
+    ///   - operation: An asynchronous throwing closure performing an operation on a connected `VanMoof.Bike`.
     /// - Returns: The result.
-    func execute<Result>(
-        resultType: Result.Type = Result.self,
-        operation: (VanMoof.Bike) async throws -> Result
-    ) async throws -> Result {
+    func execute<OperationResult>(
+        resultType: OperationResult.Type = OperationResult.self,
+        shouldDisconnectAfterOperationFinished: Bool = false,
+        operation: (VanMoof.Bike) async throws -> OperationResult
+    ) async throws -> OperationResult {
         // Initialize a bool value if the bike is already connected
         // before the operation has been executed
         let isConnected = self.isConnected
@@ -22,7 +28,7 @@ public extension VanMoof.Bike {
             try await self.connect()
         }
         // Execute operation
-        let result: Swift.Result<Result, Swift.Error> = await {
+        let result: Result<OperationResult, Swift.Error> = await {
             do {
                 // Try to perform the operation and return success
                 return .success(try await operation(self))
@@ -31,9 +37,9 @@ public extension VanMoof.Bike {
                 return .failure(error)
             }
         }()
-        // Check if bike was not connected before
-        // the operation has been executed
-        if !isConnected {
+        // Check if should disconnect after operation finished
+        // or if the bike was not connected before the operation has been executed
+        if shouldDisconnectAfterOperationFinished || !isConnected {
             // Disconnect from the bike in a child task
             Task {
                 try await self.disconnect()

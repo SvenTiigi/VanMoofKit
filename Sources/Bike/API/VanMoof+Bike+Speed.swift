@@ -5,8 +5,8 @@ import Foundation
 
 public extension VanMoof.Bike {
     
-    /// The speed of a bike measured in kilometers per hour `km/h`.
-    typealias Speed = Int
+    /// The speed of a bike.
+    typealias Speed = Measurement<UnitSpeed>
     
 }
 
@@ -17,14 +17,19 @@ public extension VanMoof.Bike {
     /// The current Speed
     var speed: Speed {
         get async throws {
-            return try await self.bluetoothManager
-                .read(
-                    characteristic: BluetoothServices
-                        .Movement
-                        .SpeedCharacteristic
-                        .self
-                )
-                .speed
+            .init(
+                value: .init(
+                    try await self.bluetoothManager
+                        .read(
+                            characteristic: BluetoothServices
+                                .Movement
+                                .SpeedCharacteristic
+                                .self
+                        )
+                        .speed
+                ),
+                unit: .kilometersPerHour
+            )
         }
     }
     
@@ -45,6 +50,7 @@ public extension VanMoof.Bike {
             )
             .map(\.speed)
             .removeDuplicates()
+            .map { .init(value: .init($0), unit: .kilometersPerHour) }
             .eraseToAnyPublisher()
     }
     
