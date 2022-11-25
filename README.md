@@ -53,7 +53,7 @@ for bike in bikes {
 
 ## Disclaimer
 
-> VanMoofKit is not an official library of [VanMoof B.V](https://vanmoof.com). This Swift Package makes certain features of the bike accessible which may be illegal to use in certain jurisdictions. As this library hasn't reached an official 1.0 version some features are currently not available or may not working as expected.
+> VanMoofKit is not an official library of [VanMoof B.V](https://vanmoof.com). This Swift Package makes certain features of the bike accessible which may be illegal to use in certain jurisdictions. As this library hasn't reached an official stable version some features are not yet available or may not working as expected.
 
 ## Features
 
