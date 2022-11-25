@@ -16,7 +16,7 @@
    <a href="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml">
        <img src="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml/badge.svg" alt="Build and Test Status">
    </a>
-   <img src="https://img.shields.io/badge/Platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20watchOS-F05138" alt="Platform">
+   <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FChimeHQ%2FExtendable%2Fbadge%3Ftype%3Dplatforms" alt="Platform">
    <a href="https://twitter.com/SvenTiigi/">
       <img src="https://img.shields.io/badge/Twitter-@SvenTiigi-blue.svg?style=flat" alt="Twitter">
    </a>
