@@ -2,13 +2,15 @@ name: Build and Test
 
 on:
   push:
-    branches:
-      - main
-      - develop
+    paths:
+      - 'Sources/**'
+      - 'Tests/**'
+      - '!Sources/VanMoofKit/Documentation.docc/**'
   pull_request:
-    branches:
-      - main
-      - develop
+    paths:
+      - 'Sources/**'
+      - 'Tests/**'
+      - '!Sources/VanMoofKit/Documentation.docc/**'
 
 jobs:
   build:
