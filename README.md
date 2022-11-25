@@ -23,6 +23,9 @@
    <a href="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml">
        <img src="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml/badge.svg" alt="Build and Test Status">
    </a>
+   <a href="https://sventiigi.github.io/VanMoofKit/documentation/vanmoofkit/">
+        <imag src="https://img.shields.io/badge/Documentation-DocC-blue" alt="Documentation">
+   </a>
    <a href="https://twitter.com/SvenTiigi/">
       <img src="https://img.shields.io/badge/Twitter-@SvenTiigi-blue.svg?style=flat" alt="Twitter">
    </a>
