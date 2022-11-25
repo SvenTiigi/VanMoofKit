@@ -13,14 +13,15 @@
 </p>
 
 <p align="center">
-   <a href="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml">
-       <img src="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml/badge.svg" alt="Build and Test Status">
-   </a>
    <a href="https://swiftpackageindex.com/SvenTiigi/VanMoofKit">
     <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSvenTiigi%2FVanMoofKit%2Fbadge%3Ftype%3Dswift-versions" alt="Swift Version">
    </a>
    <a href="https://swiftpackageindex.com/SvenTiigi/VanMoofKit">
     <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSvenTiigi%2FVanMoofKit%2Fbadge%3Ftype%3Dplatforms" alt="Platforms">
+   </a>
+   <br/>
+   <a href="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml">
+       <img src="https://github.com/SvenTiigi/VanMoofKit/actions/workflows/build_and_test.yml/badge.svg" alt="Build and Test Status">
    </a>
    <a href="https://twitter.com/SvenTiigi/">
       <img src="https://img.shields.io/badge/Twitter-@SvenTiigi-blue.svg?style=flat" alt="Twitter">
