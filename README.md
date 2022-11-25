@@ -397,6 +397,7 @@ let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 
 - [CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift)
 - [pymoof](https://github.com/quantsini/pymoof)
+- [vanbike-lib](https://github.com/Poket-Jony/vanbike-lib)
 - [Mooovy](https://github.com/mjarkk/vanmoof-web-controller)
 
 ## License
