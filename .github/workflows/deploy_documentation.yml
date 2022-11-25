@@ -32,11 +32,25 @@ jobs:
             -derivedDataPath ../DerivedData
       - name: Process Archive
         run: |
-          mkdir _site
+          mkdir docs
           $(xcrun --find docc) process-archive \
             transform-for-static-hosting ../DerivedData/Build/Products/Debug-iphoneos/VanMoofKit.doccarchive \
-            --output-path _site \
+            --output-path docs \
             --hosting-base-path VanMoofKit
+      - name: Create Custom index.html
+        run: |
+          rm docs/index.html
+          cat > docs/index.html <<- EOM
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="refresh" content="0; url='https://sventiigi.github.io/VanMoofKit/documentation/vanmoofkit/'" />
+            </head>
+           <body>
+              <p>Please follow <a href="https://sventiigi.github.io/VanMoofKit/documentation/vanmoofkit/">this link</a>.</p>
+            </body>
+          </html>
+          EOM
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
 
