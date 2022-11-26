@@ -162,8 +162,8 @@ extension VanMoof.Bike.BluetoothData {
         fromByteOffset offset: Int = 0,
         as type: Number.Type
     ) -> Int? {
-        // Verify data is not empty
-        guard !self.isEmpty else {
+        // Verify data satisfyes the size of the memory layout
+        guard self.rawValue.count >= MemoryLayout<Number>.size else {
             // Otherwise return nil
             return nil
         }
