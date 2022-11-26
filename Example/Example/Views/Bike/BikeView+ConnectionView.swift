@@ -35,7 +35,6 @@ private extension BikeView.ConnectionView {
         do {
             try await bike.connect()
         } catch {
-            print("here", error)
             self.connectionError = error
         }
     }
