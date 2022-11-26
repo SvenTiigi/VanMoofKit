@@ -243,6 +243,26 @@ try await bike.set(moduleState: .on)
 try await bike.wakeUp()
 ```
 
+**LockState**
+
+```swift
+switch try await bike.lockState {
+case .unlocked:
+    break
+case .locked:
+    break
+case .awaitingUnlock:
+    break
+}
+
+bike.lockStatePublisher.sink { lockState in
+    // ...
+}
+
+// Unlock Bike
+try await bike.unlock()
+```
+
 **Battery Level**
 
 ```swift
