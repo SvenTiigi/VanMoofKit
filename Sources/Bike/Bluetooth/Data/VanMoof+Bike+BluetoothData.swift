@@ -186,7 +186,7 @@ extension VanMoof.Bike.BluetoothData {
 extension VanMoof.Bike.BluetoothData {
     
     /// Parse BluetoothData as an Integer RawRepresentable type, if available.
-    /// - Parameter representable: The Integer RawRepresentable type
+    /// - Parameter representable: The RawRepresentable type with an Integer RawValue.
     /// - Returns: The RawRepresentable instance, if available.
     func parse<Representable: RawRepresentable>(
         as representable: Representable.Type = Representable.self
