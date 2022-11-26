@@ -48,9 +48,9 @@ public extension VanMoof.Bike.SignalStrength {
     /// The SignalStrength Level.
     var level: Level {
         switch self.decibels {
-        case (-55)...:
-            return .good
         case (-67)...:
+            return .good
+        case (-80)...:
             return .fair
         case (-90)...:
             return .poor
