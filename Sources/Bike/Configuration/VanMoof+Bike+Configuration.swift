@@ -18,6 +18,16 @@ public extension VanMoof.Bike.Configuration {
     
 }
 
+// MARK: - VanMoof+Bike+Configuration+isAutoReconnectEnabled
+
+public extension VanMoof.Bike.Configuration {
+    
+    /// Bool value whether auto reconnecting is enabled or disabled
+    /// whenever the connection timed out. Default value `true`
+    static var isAutoReconnectEnabled = true
+    
+}
+
 // MARK: - VanMoof+Bike+Configuration+isLoggingEnabled
 
 public extension VanMoof.Bike.Configuration {

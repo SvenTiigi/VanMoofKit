@@ -46,25 +46,33 @@ private extension VanMoof.Bike {
         let bluetoothManager = BluetoothManager(
             details: self.details
         )
+        // Subscribe to events
         bluetoothManager
             .sink { event in
+                // Switch on event
                 switch event {
                 case .didDisconnectPeripheral(_, let error):
-                    guard let bluetoothError = error as? CBError,
+                    // Verify auto reconnect is enabled and error
+                    // is a connection timeout
+                    guard Configuration.isAutoReconnectEnabled,
+                          let bluetoothError = error as? CBError,
                           bluetoothError.code == .connectionTimeout else {
+                        // Otherwise return out of function
                         return
                     }
+                    // Reconnect
                     Task {
                         try await self.connect()
                     }
                 default:
-                    return
+                    break
                 }
             }
             .store(in: &self.cancellables)
         // Subscribe to events
         bluetoothManager
             .sink { [weak self] event in
+                // Switch on event
                 switch event {
                 case .didUpdateState,
                         .didConnectPeripheral,
