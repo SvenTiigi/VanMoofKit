@@ -29,10 +29,12 @@ extension VanMoof.Bike.BluetoothServices.Movement.UnitSystemCharacteristic: VanM
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let unitSystem = VanMoof.Bike.UnitSystem(rawValue: data.integerValue) else {
+        guard let unitSystem: VanMoof.Bike.UnitSystem = data.parse() else {
             return nil
         }
-        self.unitSystem = unitSystem
+        self.init(
+            unitSystem: unitSystem
+        )
     }
     
 }

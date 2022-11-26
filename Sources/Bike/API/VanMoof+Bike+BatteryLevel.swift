@@ -6,7 +6,7 @@ import Foundation
 public extension VanMoof.Bike {
     
     /// A VanMoof Bike BatteryLevel
-    struct BatteryLevel: Codable, Hashable {
+    struct BatteryLevel: Codable, Hashable, Sendable {
         
         // MARK: Properties
         
@@ -92,18 +92,16 @@ public extension VanMoof.Bike.BatteryLevel {
 
 public extension VanMoof.Bike {
     
-    /// The battery level.
+    /// The motor battery level.
     var batteryLevel: BatteryLevel {
         get async throws {
-            .init(
-                try await self.bluetoothManager.read(
-                    characteristic: BluetoothServices
-                        .Info
-                        .MotorBatteryLevelCharacteristic
-                        .self
-                )
-                .batteryLevel
+            try await self.bluetoothManager.read(
+                characteristic: BluetoothServices
+                    .Info
+                    .MotorBatteryLevelCharacteristic
+                    .self
             )
+            .batteryLevel
         }
     }
     
@@ -113,7 +111,7 @@ public extension VanMoof.Bike {
 
 public extension VanMoof.Bike {
     
-    /// A Publisher that emits the battery level whenever a change occurred.
+    /// A Publisher that emits the motor battery level whenever a change occurred.
     var batteryLevelPublisher: AnyPublisher<BatteryLevel, Never> {
         self.bluetoothManager
             .publisher(
@@ -124,7 +122,6 @@ public extension VanMoof.Bike {
             )
             .map(\.batteryLevel)
             .removeDuplicates()
-            .map { BatteryLevel($0) }
             .eraseToAnyPublisher()
     }
     
@@ -137,15 +134,13 @@ public extension VanMoof.Bike {
     /// The module battery level.
     var moduleBatteryLevel: BatteryLevel {
         get async throws {
-            .init(
-                try await self.bluetoothManager.read(
-                    characteristic: BluetoothServices
-                        .Info
-                        .ModuleBatteryLevelCharacteristic
-                        .self
-                )
-                .batteryLevel
+            try await self.bluetoothManager.read(
+                characteristic: BluetoothServices
+                    .Info
+                    .ModuleBatteryLevelCharacteristic
+                    .self
             )
+            .batteryLevel
         }
     }
     
@@ -166,7 +161,6 @@ public extension VanMoof.Bike {
             )
             .map(\.batteryLevel)
             .removeDuplicates()
-            .map { BatteryLevel($0) }
             .eraseToAnyPublisher()
     }
     

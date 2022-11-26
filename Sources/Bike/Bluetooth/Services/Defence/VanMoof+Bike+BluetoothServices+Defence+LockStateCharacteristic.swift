@@ -29,10 +29,12 @@ extension VanMoof.Bike.BluetoothServices.Defence.LockStateCharacteristic: VanMoo
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let lockState = VanMoof.Bike.LockState(rawValue: data.integerValue) else {
+        guard let lockState: VanMoof.Bike.LockState = data.parse() else {
             return nil
         }
-        self.lockState = lockState
+        self.init(
+            lockState: lockState
+        )
     }
     
 }

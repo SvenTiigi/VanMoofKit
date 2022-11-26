@@ -29,10 +29,10 @@ extension VanMoof.Bike.BluetoothServices.State.ModuleStateCharacteristic: VanMoo
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let moduleState = VanMoof.Bike.ModuleState(rawValue: data.integerValue) else {
+        guard let moduleState: VanMoof.Bike.ModuleState = data.parse() else {
             return nil
         }
-        self.moduleState = moduleState
+        self.init(moduleState: moduleState)
     }
     
 }

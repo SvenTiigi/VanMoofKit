@@ -8,12 +8,17 @@ extension BikeView {
     /// The BatteryLevelCard
     struct BatteryLevelCard {
         
+        /// The VanMoof Bike BatteryState
+        @State
+        private var batteryState: VanMoof.Bike.BatteryState?
+        
         /// The VanMoof Bike
         @EnvironmentObject
         private var bike: VanMoof.Bike
         
-        @State
-        private var isCharging: Bool = false
+        /// The redaction reasons.
+        @Environment(\.redactionReasons)
+        private var redactionReasons
         
     }
     
@@ -54,7 +59,7 @@ extension BikeView.BatteryLevelCard: View {
                 Label(
                     "Battery",
                     systemImage: {
-                        if self.isCharging {
+                        if self.batteryState?.isCharging == true {
                             return "battery.100.bolt"
                         }
                         switch batteryLevel.level {
@@ -76,6 +81,21 @@ extension BikeView.BatteryLevelCard: View {
                 EmptyView()
             }
         )
+        .onChange(
+            of: self.redactionReasons
+        ) { redactionReasons in
+            guard redactionReasons.isEmpty, self.batteryState == nil else {
+                return
+            }
+            Task {
+                self.batteryState = try? await self.bike.batteryState
+            }
+        }
+        .onReceive(
+            self.bike.batteryStatePublisher
+        ) { batteryState in
+            self.batteryState = batteryState
+        }
     }
     
 }

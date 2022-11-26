@@ -29,10 +29,12 @@ extension VanMoof.Bike.BluetoothServices.Sound.BellSoundCharacteristic: VanMoofB
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let bellSound = VanMoof.Bike.BellSound(rawValue: data.integerValue) else {
+        guard let bellSound: VanMoof.Bike.BellSound = data.parse() else {
             return nil
         }
-        self.bellSound = bellSound
+        self.init(
+            bellSound: bellSound
+        )
     }
     
 }

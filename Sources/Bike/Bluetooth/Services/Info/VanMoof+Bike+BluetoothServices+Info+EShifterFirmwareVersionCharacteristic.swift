@@ -24,7 +24,12 @@ extension VanMoof.Bike.BluetoothServices.Info.EShifterFirmwareVersionCharacteris
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        self.version = data.stringValue
+        guard let version = data.stringValue else {
+            return nil
+        }
+        self.init(
+            version: version
+        )
     }
     
 }

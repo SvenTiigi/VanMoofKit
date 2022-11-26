@@ -24,7 +24,12 @@ extension VanMoof.Bike.BluetoothServices.Movement.SpeedCharacteristic: VanMoofBi
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        self.speed = data.integerValue
+        guard let speed = data.integerValue else {
+            return nil
+        }
+        self.init(
+            speed: speed
+        )
     }
     
 }

@@ -8,12 +8,6 @@ public extension VanMoof.Bike {
     /// Connect to the VanMoof Bike.
     func connect() async throws {
         try await self.bluetoothManager.connect()
-        
-            Task {
-                try await self.bluetoothManager.read(
-                    characteristic: BluetoothServices.Info.GSMFirmwareVersionCharacteristic.self
-                )
-            }
     }
     
 }

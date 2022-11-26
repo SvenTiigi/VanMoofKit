@@ -29,10 +29,12 @@ extension VanMoof.Bike.BluetoothServices.Movement.SpeedLimitCharacteristic: VanM
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let speedLimit = VanMoof.Bike.SpeedLimit(rawValue: data.integerValue) else {
+        guard let speedLimit: VanMoof.Bike.SpeedLimit = data.parse() else {
             return nil
         }
-        self.speedLimit = speedLimit
+        self.init(
+            speedLimit: speedLimit
+        )
     }
     
 }

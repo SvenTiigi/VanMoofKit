@@ -24,7 +24,12 @@ extension VanMoof.Bike.BluetoothServices.Sound.SoundVolumeCharacteristic: VanMoo
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        self.soundVolume = data.integerValue
+        guard let soundVolume = data.integerValue else {
+            return nil
+        }
+        self.init(
+            soundVolume: soundVolume
+        )
     }
     
 }

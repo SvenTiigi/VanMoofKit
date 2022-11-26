@@ -29,10 +29,10 @@ extension VanMoof.Bike.BluetoothServices.Light.ModeCharacteristic: VanMoofBikeBl
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let lightMode = VanMoof.Bike.LightMode(rawValue: data.integerValue) else {
+        guard let lightMode: VanMoof.Bike.LightMode = data.parse() else {
             return nil
         }
-        self.lightMode = lightMode
+        self.init(lightMode: lightMode)
     }
     
 }

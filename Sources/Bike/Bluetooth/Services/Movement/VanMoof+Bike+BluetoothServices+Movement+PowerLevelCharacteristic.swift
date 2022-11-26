@@ -29,10 +29,12 @@ extension VanMoof.Bike.BluetoothServices.Movement.PowerLevelCharacteristic: VanM
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let powerLevel = VanMoof.Bike.PowerLevel(rawValue: data.integerValue) else {
+        guard let powerLevel: VanMoof.Bike.PowerLevel = data.parse() else {
             return nil
         }
-        self.powerLevel = powerLevel
+        self.init(
+            powerLevel: powerLevel
+        )
     }
     
 }

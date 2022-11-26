@@ -8,7 +8,7 @@ extension VanMoof.Bike.BluetoothServices.Movement {
     struct DistanceCharacteristic {
         
         /// The total distance in kilometers
-        let totalDistanceInKilometers: Int
+        let totalDistanceInKilometers: Double
 
     }
     
@@ -24,7 +24,12 @@ extension VanMoof.Bike.BluetoothServices.Movement.DistanceCharacteristic: VanMoo
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        self.totalDistanceInKilometers = data.integerValue / 10
+        guard let distance = data.integerValue(as: UInt32.self) else {
+            return nil
+        }
+        self.init(
+            totalDistanceInKilometers: .init(distance) / 10
+        )
     }
     
 }

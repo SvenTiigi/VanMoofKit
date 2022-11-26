@@ -528,9 +528,8 @@ private extension VanMoofBikeBluetoothReadableCharacteristic {
         characteristic: CBCharacteristic,
         crypto: VanMoof.Bike.BluetoothCrypto
     ) throws {
-        // Verify characteristic value is available and not empty
-        guard var characteristicValue = characteristic.value,
-              !characteristicValue.isEmpty else {
+        // Verify characteristic value is available
+        guard var characteristicValue = characteristic.value else {
             // Otherwise throw an error
             throw VanMoof.Bike.Error(
                 errorDescription: "\(Self.self) value unavailable"

@@ -29,10 +29,12 @@ extension VanMoof.Bike.BluetoothServices.Defence.AlarmModeCharacteristic: VanMoo
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        guard let alarmMode = VanMoof.Bike.AlarmMode(rawValue: data.integerValue) else {
+        guard let alarmMode: VanMoof.Bike.AlarmMode = data.parse() else {
             return nil
         }
-        self.alarmMode = alarmMode
+        self.init(
+            alarmMode: alarmMode
+        )
     }
     
 }

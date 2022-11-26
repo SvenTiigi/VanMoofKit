@@ -23,7 +23,12 @@ extension VanMoof.Bike.BluetoothServices.State.ErrorsCharacteristic: VanMoofBike
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        self.errorCode = .init(code: data.integerValue)
+        guard let code = data.integerValue else {
+            return nil
+        }
+        self.init(
+            errorCode: .init(code: code)
+        )
     }
     
 }

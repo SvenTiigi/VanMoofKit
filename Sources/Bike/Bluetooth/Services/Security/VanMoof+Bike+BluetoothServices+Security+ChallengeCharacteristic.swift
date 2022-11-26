@@ -28,7 +28,12 @@ extension VanMoof.Bike.BluetoothServices.Security.ChallengeCharacteristic: VanMo
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        self.nonce = data.rawValue
+        guard !data.isEmpty else {
+            return nil
+        }
+        self.init(
+            nonce: data.rawValue
+        )
     }
     
 }

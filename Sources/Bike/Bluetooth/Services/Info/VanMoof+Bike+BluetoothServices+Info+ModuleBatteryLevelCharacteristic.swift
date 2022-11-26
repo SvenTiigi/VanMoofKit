@@ -8,7 +8,7 @@ extension VanMoof.Bike.BluetoothServices.Info {
     struct ModuleBatteryLevelCharacteristic {
 
         /// The battery level
-        let batteryLevel: Int
+        let batteryLevel: VanMoof.Bike.BatteryLevel
         
     }
     
@@ -24,7 +24,12 @@ extension VanMoof.Bike.BluetoothServices.Info.ModuleBatteryLevelCharacteristic: 
     /// Creates a new instance from VanMoof Bike BluetoothData, if available
     /// - Parameter data: The VanMoof Bike BluetoothData
     init?(data: VanMoof.Bike.BluetoothData) {
-        self.batteryLevel = data.integerValue
+        guard let batteryLevel = data.integerValue else {
+            return nil
+        }
+        self.init(
+            batteryLevel: .init(batteryLevel)
+        )
     }
     
 }

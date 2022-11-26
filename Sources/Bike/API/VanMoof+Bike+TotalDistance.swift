@@ -18,15 +18,13 @@ public extension VanMoof.Bike {
     var totalDistance: Distance {
         get async throws {
             .init(
-                value: .init(
-                    try await self.bluetoothManager
-                        .read(
-                            characteristic: BluetoothServices
-                                .Movement
-                                .DistanceCharacteristic.self
-                        )
-                        .totalDistanceInKilometers
-                ),
+                value: try await self.bluetoothManager
+                    .read(
+                        characteristic: BluetoothServices
+                            .Movement
+                            .DistanceCharacteristic.self
+                    )
+                    .totalDistanceInKilometers,
                 unit: .kilometers
             )
         }
@@ -49,7 +47,7 @@ public extension VanMoof.Bike {
             )
             .map(\.totalDistanceInKilometers)
             .removeDuplicates()
-            .map { .init(value: .init($0), unit: .kilometers) }
+            .map { .init(value: $0, unit: .kilometers) }
             .eraseToAnyPublisher()
     }
     
