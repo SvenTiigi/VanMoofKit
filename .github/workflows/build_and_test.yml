@@ -18,27 +18,27 @@ jobs:
     name: Build and test on iOS
     runs-on: macOS-12
     steps:
-        - uses: actions/checkout@v3
-        - name: Build
-          run: xcodebuild clean build-for-testing -scheme VanMoofKit -destination 'platform=iOS Simulator,name=iPhone 14'
-        - name: Test
-          run: xcodebuild test-without-building -scheme VanMoofKit -destination 'platform=iOS Simulator,name=iPhone 14'
+      - uses: actions/checkout@v3
+      - name: Build
+        run: xcodebuild build-for-testing -scheme VanMoofKit -destination 'platform=iOS Simulator,name=iPhone 14'
+      - name: Test
+        run: xcodebuild test-without-building -scheme VanMoofKit -destination 'platform=iOS Simulator,name=iPhone 14'
   macOS:
     name: Build and test on macOS
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: swift build -v
-    - name: Test
-      run: swift test -v
+      - uses: actions/checkout@v3
+      - name: Build
+        run: swift build -v
+      - name: Test
+        run: swift test -v
   watchOS:
     name: Build and test on watchOS
     runs-on: macOS-12
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: xcodebuild clean build-for-testing -scheme VanMoofKit -destination 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm)'
+        run: xcodebuild build-for-testing -scheme VanMoofKit -destination 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm)'
       - name: Test
         run: xcodebuild test-without-building -scheme VanMoofKit -destination 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm)'
   tvOS:
@@ -47,6 +47,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: xcodebuild clean build-for-testing -scheme VanMoofKit -destination 'platform=tvOS Simulator,name=Apple TV'
+        run: xcodebuild build-for-testing -scheme VanMoofKit -destination 'platform=tvOS Simulator,name=Apple TV'
       - name: Test
         run: xcodebuild test-without-building -scheme VanMoofKit -destination 'platform=tvOS Simulator,name=Apple TV'
