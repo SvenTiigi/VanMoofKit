@@ -17,8 +17,6 @@ public extension VanMoof.Bike {
         case three
         /// Level 4
         case four
-        /// Maximum (Level 5)
-        case maximum
     }
     
 }
@@ -29,12 +27,6 @@ public extension VanMoof.Bike.PowerLevel {
     
     /// Zero (Off)
     static let zero: Self = .off
-    
-    /// Maximum (Level 5)
-    static let max: Self = .maximum
-    
-    /// Maximum (Level 5)
-    static let five: Self = .maximum
     
 }
 
