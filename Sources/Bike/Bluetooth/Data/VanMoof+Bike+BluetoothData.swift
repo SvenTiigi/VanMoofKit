@@ -79,6 +79,24 @@ extension VanMoof.Bike.BluetoothData {
     
 }
 
+// MARK: - VanMoof+Bike+BluetoothData+CustomStringConvertible
+
+extension VanMoof.Bike.BluetoothData: CustomStringConvertible {
+    
+    /// A textual representation of this instance.
+    var description: String {
+        [
+            String(describing: self.rawValue),
+            "Bytes: \(Array(self.rawValue))",
+            "String: \(self.stringValue ?? "N.A.")",
+            "UInt8: \(self.integerValue(as: UInt8.self).flatMap(String.init) ?? "N.A.")",
+            "UInt32: \(self.integerValue(as: UInt32.self).flatMap(String.init) ?? "N.A.")"
+        ]
+        .joined(separator: "\n")
+    }
+    
+}
+
 // MARK: - VanMoof+Bike+BluetoothData+isEmpty
 
 extension VanMoof.Bike.BluetoothData {
