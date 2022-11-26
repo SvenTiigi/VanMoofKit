@@ -129,3 +129,45 @@ public extension VanMoof.Bike {
     }
     
 }
+
+// MARK: - VanMoof+Bike+moduleBatteryLevel
+
+public extension VanMoof.Bike {
+    
+    /// The module battery level.
+    var moduleBatteryLevel: BatteryLevel {
+        get async throws {
+            .init(
+                try await self.bluetoothManager.read(
+                    characteristic: BluetoothServices
+                        .Info
+                        .ModuleBatteryLevelCharacteristic
+                        .self
+                )
+                .batteryLevel
+            )
+        }
+    }
+    
+}
+
+// MARK: - VanMoof+Bike+batteryLevelPublisher
+
+public extension VanMoof.Bike {
+    
+    /// A Publisher that emits the module battery level whenever a change occurred.
+    var moduleBatteryLevelPublisher: AnyPublisher<BatteryLevel, Never> {
+        self.bluetoothManager
+            .publisher(
+                for: BluetoothServices
+                    .Info
+                    .ModuleBatteryLevelCharacteristic
+                    .self
+            )
+            .map(\.batteryLevel)
+            .removeDuplicates()
+            .map { BatteryLevel($0) }
+            .eraseToAnyPublisher()
+    }
+    
+}
