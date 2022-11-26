@@ -112,6 +112,11 @@ extension VanMoof.Bike.BluetoothManager {
                     // as periphal successfully disovered services
                     return
                 }
+            case .didDisconnectPeripheral(_, let error):
+                // Throw error
+                throw VanMoof.Bike.Error(
+                    underlyingError: error
+                )
             default:
                 // Otherwise continue with next event
                 continue
@@ -177,6 +182,11 @@ extension VanMoof.Bike.BluetoothManager {
                     // Return out of function
                     return
                 }
+            case .didDisconnectPeripheral(_, let error):
+                // Throw error
+                throw VanMoof.Bike.Error(
+                    underlyingError: error
+                )
             default:
                 // Otherwise continue with next event
                 continue
@@ -263,6 +273,54 @@ extension VanMoof.Bike.BluetoothManager {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+}
+
+// MARK: - Read RSSI
+
+extension VanMoof.Bike.BluetoothManager {
+    
+    /// Retrieves the current RSSI value for the connected peripheral.
+    /// - Parameter timeoutInterval: The timeout interval. Default value `VanMoof.Bike.timeoutInterval
+    func readRSSI(
+        timeoutInterval: TimeInterval = VanMoof.Bike.timeoutInterval
+    ) async throws -> NSNumber {
+        // Read RSSI
+        try self.connectedPeripheral.readRSSI()
+        // Perform with timeout
+        return try await self.withTimeout(seconds: timeoutInterval) {
+            // For each bluetooth event
+            for try await event in self.values {
+                // Check central state
+                try self.central.checkState()
+                // Switch on event
+                switch event {
+                case .peripheralDidReadRSSI(_, let rssi, let error):
+                    // Check if an error is available
+                    if let error = error {
+                        // Throw error
+                        throw VanMoof.Bike.Error(
+                            underlyingError: error
+                        )
+                    } else {
+                        // Return the current RSSI
+                        return rssi
+                    }
+                case .didDisconnectPeripheral(_, let error):
+                    // Throw error
+                    throw VanMoof.Bike.Error(
+                        underlyingError: error
+                    )
+                default:
+                    continue
+                }
+            }
+            // Otherwise throw error
+            throw VanMoof.Bike.Error(
+                errorDescription: "RSSI is unavailable"
+            )
+        }
     }
     
 }
