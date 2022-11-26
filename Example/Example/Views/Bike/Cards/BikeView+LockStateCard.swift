@@ -37,7 +37,15 @@ extension BikeView.LockStateCard: View {
                     .offset(y: 25)
             },
             actions: { currentLockState in
-                EmptyView()
+                if currentLockState == .locked {
+                    Button {
+                        Task {
+                            try await self.bike.unlock()
+                        }
+                    } label: {
+                        Text(verbatim: "Unlock")
+                    }
+                }
             }
         )
     }

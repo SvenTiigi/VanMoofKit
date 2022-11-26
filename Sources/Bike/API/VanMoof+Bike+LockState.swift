@@ -57,21 +57,18 @@ public extension VanMoof.Bike {
     
 }
 
-// MARK: - VanMoof+Bike+set(lockState:)
+// MARK: - VanMoof+Bike+unlock
 
 public extension VanMoof.Bike {
     
-    /// Set LockState
-    /// - Parameter lockState: The LockState to set
-    func set(
-        lockState: LockState
-    ) async throws {
+    /// Unlock Bike
+    func unlock() async throws {
         try await self.bluetoothManager
             .write(
                 characteristic: BluetoothServices
                     .Defence
                     .LockStateCharacteristic(
-                        lockState: lockState
+                        lockState: .awaitingUnlock
                     )
             )
     }
