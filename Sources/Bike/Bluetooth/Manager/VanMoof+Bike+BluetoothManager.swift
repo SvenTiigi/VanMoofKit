@@ -98,7 +98,7 @@ extension VanMoof.Bike.BluetoothManager: Publisher {
     ) {
         self.eventSubject.send(input)
         // Log Event
-        VanMoof.Log.log(
+        VanMoof.Bike.Log.log(
             message: .init(describing: input)
         )
     }

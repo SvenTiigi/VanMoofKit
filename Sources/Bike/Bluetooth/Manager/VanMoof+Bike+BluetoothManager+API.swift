@@ -30,9 +30,9 @@ private extension VanMoof.Bike.BluetoothManager {
 extension VanMoof.Bike.BluetoothManager {
     
     /// Establish a connection to the VanMoof Bike.
-    /// - Parameter timeoutInterval: The timeout interval. Default value `VanMoof.Bike.timeoutInterval`
+    /// - Parameter timeoutInterval: The timeout interval. Default value `VanMoof.Bike.Configuration.timeoutInterval`
     func connect(
-        timeoutInterval: TimeInterval = VanMoof.Bike.timeoutInterval
+        timeoutInterval: TimeInterval = VanMoof.Bike.Configuration.timeoutInterval
     ) async throws {
         // Verify connection state is not connected
         guard self.peripheral?.state != .connected else {
@@ -221,9 +221,9 @@ extension VanMoof.Bike.BluetoothManager {
 extension VanMoof.Bike.BluetoothManager {
     
     /// Disconnect from VanMoof Bike.
-    /// - Parameter timeoutInterval: The timeout interval. Default value `VanMoof.Bike.timeoutInterval
+    /// - Parameter timeoutInterval: The timeout interval. Default value `VanMoof.Bike.Configuration.timeoutInterval
     func disconnect(
-        timeoutInterval: TimeInterval = VanMoof.Bike.timeoutInterval
+        timeoutInterval: TimeInterval = VanMoof.Bike.Configuration.timeoutInterval
     ) async throws {
         // Check central state
         try self.central.checkState()
@@ -282,9 +282,9 @@ extension VanMoof.Bike.BluetoothManager {
 extension VanMoof.Bike.BluetoothManager {
     
     /// Retrieves the current RSSI value for the connected peripheral.
-    /// - Parameter timeoutInterval: The timeout interval. Default value `VanMoof.Bike.timeoutInterval
+    /// - Parameter timeoutInterval: The timeout interval. Default value `VanMoof.Bike.Configuration.timeoutInterval
     func readRSSI(
-        timeoutInterval: TimeInterval = VanMoof.Bike.timeoutInterval
+        timeoutInterval: TimeInterval = VanMoof.Bike.Configuration.timeoutInterval
     ) async throws -> NSNumber {
         // Read RSSI
         try self.connectedPeripheral.readRSSI()
@@ -332,10 +332,10 @@ extension VanMoof.Bike.BluetoothManager {
     /// Read VanMoof Bike Bluetooth Characteristic.
     /// - Parameters:
     ///   - characteristic: The VanMoof Bike Bluetooth Characteristic type to read.
-    ///   - timeoutInterval: The timeout interval. Default value `VanMoof.Bike.timeoutInterval
+    ///   - timeoutInterval: The timeout interval. Default value `VanMoof.Bike.Configuration.timeoutInterval`
     func read<Characteristic: VanMoofBikeBluetoothReadableCharacteristic>(
         characteristic: Characteristic.Type,
-        timeoutInterval: TimeInterval = VanMoof.Bike.timeoutInterval
+        timeoutInterval: TimeInterval = VanMoof.Bike.Configuration.timeoutInterval
     ) async throws -> Characteristic {
         // Check central state
         try self.central.checkState()
@@ -395,10 +395,10 @@ extension VanMoof.Bike.BluetoothManager {
     /// Write VanMoof Bike Bluetooth Characteristic.
     /// - Parameters:
     ///   - characteristic: The VanMoof Bike Bluetooth Characteristic to write.
-    ///   - timeoutInterval: The timeout interval. Default value `VanMoof.Bike.timeoutInterval
+    ///   - timeoutInterval: The timeout interval. Default value `VanMoof.Bike.Configuration.timeoutInterval
     func write<Characteristic: VanMoofBikeBluetoothWritableCharacteristic>(
         characteristic: Characteristic,
-        timeoutInterval: TimeInterval = VanMoof.Bike.timeoutInterval
+        timeoutInterval: TimeInterval = VanMoof.Bike.Configuration.timeoutInterval
     ) async throws {
         // Check central state
         try self.central.checkState()

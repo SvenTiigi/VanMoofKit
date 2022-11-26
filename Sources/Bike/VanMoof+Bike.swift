@@ -10,11 +10,6 @@ public extension VanMoof {
     @dynamicMemberLookup
     final class Bike: ObservableObject {
         
-        // MARK: Static-Properties
-        
-        /// The default TimeInterval
-        public static var timeoutInterval: TimeInterval = 30
-        
         // MARK: Properties
         
         /// The details of the bike.
