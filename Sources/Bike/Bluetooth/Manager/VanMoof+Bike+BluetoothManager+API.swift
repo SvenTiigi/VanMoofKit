@@ -340,7 +340,7 @@ extension VanMoof.Bike.BluetoothManager {
         // Check central state
         try self.central.checkState()
         // Retrieve CoreBluetooth characterstic
-        let coreBluetoothCharacteristic = try self.coreBluetoothCharacteristic(for: characteristic)
+        let coreBluetoothCharacteristic = try self.connectedPeripheral.characteristic(characteristic)
         // Read value for CoreBluetooth characterstic
         try self.connectedPeripheral.readValue(for: coreBluetoothCharacteristic)
         // Perform with timeout
@@ -403,7 +403,7 @@ extension VanMoof.Bike.BluetoothManager {
         // Check central state
         try self.central.checkState()
         // Retrieve CoreBluetooth Characteristic
-        let coreBluetoothCharacteristic = try self.coreBluetoothCharacteristic(for: Characteristic.self)
+        let coreBluetoothCharacteristic = try self.connectedPeripheral.characteristic(Characteristic.self)
         // Initialize CoreBluetooth Characteristic WriteType
         let writeType: CBCharacteristicWriteType = coreBluetoothCharacteristic.properties.contains(.write)
             ? .withResponse
@@ -490,27 +490,27 @@ extension VanMoof.Bike.BluetoothManager {
     
 }
 
-// MARK: - CoreBluetooth Characteristic
-
-private extension VanMoof.Bike.BluetoothManager {
+// MARK: - CBPeripheral+characteristic
+ 
+private extension CBPeripheral {
     
-    /// Retrieve CBCharacteristic for a given VanMoofBikeBluetoothCharacteristic type, if available.
+    /// Retrieve a CBCharacteristic for a given VanMoofBikeBluetoothCharacteristic type,
+    /// or throws a `VanMoof.Bike.Error` if not available
     /// - Parameter characteristic: The VanMoofBikeBluetoothCharacteristic type.
-    func coreBluetoothCharacteristic(
-        for characteristic: VanMoofBikeBluetoothCharacteristic.Type
+    func characteristic(
+        _ characteristic: VanMoofBikeBluetoothCharacteristic.Type
     ) throws -> CBCharacteristic {
-        // Verify the characteristic is available
-        guard let characteristic = try self
-            .connectedPeripheral
-            .services?
+        // Verify characteristic is available
+        guard let characteristic = self.services?
             .compactMap(\.characteristics)
             .flatMap({ $0 })
             .first(where: { $0.uuid == .init(string: characteristic.id) }) else {
-            // Throw error
+            // Otherwise throw error
             throw VanMoof.Bike.Error(
                 errorDescription: "\(characteristic.self) not found"
             )
         }
+        // Return characteristic
         return characteristic
     }
     
