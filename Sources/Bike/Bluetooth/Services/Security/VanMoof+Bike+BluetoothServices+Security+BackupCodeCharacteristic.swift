@@ -8,7 +8,6 @@ extension VanMoof.Bike.BluetoothServices.Security {
     enum BackupCodeCharacteristic: VanMoofBikeBluetoothCharacteristic {
         /// The identifier.
         static let id: String = "6ACC5503-E631-4069-944D-B8CA7598AD50"
-        #warning("BackupCodeCharacteristic")
     }
     
 }
