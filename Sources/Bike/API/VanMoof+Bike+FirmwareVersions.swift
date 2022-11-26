@@ -113,3 +113,22 @@ public extension VanMoof.Bike {
     }
     
 }
+
+// MARK: - VanMoof+Bike+pcbaHardwareVersion
+
+public extension VanMoof.Bike {
+    
+    /// The Printed Circuit Board Assembly (PCBA) hardware version.
+    var pcbaHardwareVersion: String {
+        get async throws {
+            try await self.bluetoothManager
+                .read(
+                    characteristic: BluetoothServices
+                        .Info
+                        .PCBAHardwareVersionCharacteristic.self
+                )
+                .version
+        }
+    }
+    
+}

@@ -44,6 +44,10 @@ extension BikeView.FirmwareCard: View {
                         title: "E-Shifter",
                         detail: firmwareSummary.eShifterFirmwareVersion
                     )
+                    self.entry(
+                        title: "PCBA Hardware",
+                        detail: firmwareSummary.pcbaHardwareVersion
+                    )
                 }
             },
             actions: { _ in
@@ -100,6 +104,8 @@ private extension VanMoof.Bike {
         /// The E-Shifter firmware version
         var eShifterFirmwareVersion: String?
         
+        var pcbaHardwareVersion: String?
+        
     }
     
     /// The FirmwareSummary
@@ -108,10 +114,12 @@ private extension VanMoof.Bike {
             async let bikeFirmwareVersion = self.bikeFirmwareVersion
             async let bleChipFirmwareVersion = self.bleChipFirmwareVersion
             async let eShifterFirmwareVersion = self.eShifterFirmwareVersion
+            async let pcbaHardwareVersion = self.pcbaHardwareVersion
             return .init(
                 bikeFirmwareVersion: try? await bikeFirmwareVersion,
                 bleChipFirmwareVersion: try? await bleChipFirmwareVersion,
-                eShifterFirmwareVersion: try? await eShifterFirmwareVersion
+                eShifterFirmwareVersion: try? await eShifterFirmwareVersion,
+                pcbaHardwareVersion: try? await pcbaHardwareVersion
             )
         }
     }
