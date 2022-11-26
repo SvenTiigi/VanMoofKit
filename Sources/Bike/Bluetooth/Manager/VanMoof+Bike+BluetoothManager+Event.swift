@@ -96,3 +96,37 @@ extension VanMoof.Bike.BluetoothManager {
     }
     
 }
+
+// MARK: - VanMoof+Bike+BluetoothManager+Event+error
+
+extension VanMoof.Bike.BluetoothManager.Event {
+    
+    /// The Error of the Event, if available.
+    var error: Swift.Error? {
+        switch self {
+        case .didUpdateState,
+                .didDiscoverPeripheral,
+                .didConnectPeripheral,
+                .peripheralDidUpdateName,
+                .peripheralDidModifyServices,
+                .peripheralIsReadyToSendWriteWithoutResponse:
+            return nil
+        case .didAuthenticatedPeripheral(_, _, let error),
+                .didFailToConnectPeripheral(_, let error),
+                .didDisconnectPeripheral(_, let error),
+                .peripheralDidReadRSSI(_, _, let error),
+                .peripheralDidDiscoverServices(_, let error),
+                .peripheralDidDiscoverIncludedServices(_, _, let error),
+                .peripheralDidDiscoverCharacteristics(_, _, let error),
+                .peripheralDidUpdateValueForCharacteristic(_, _, let error),
+                .peripheralDidWriteValueForCharacteristic(_, _, let error),
+                .peripheralDidUpdateNotificationStateForCharacteristic(_, _, let error),
+                .peripheralDidDiscoverDescriptorsForCharacteristic(_, _, let error),
+                .peripheralDidUpdateValueForDescriptor(_, _, let error),
+                .peripheralDidWriteValueForDescriptor(_, _, let error),
+                .peripheralDidOpenChannel(_, _, let error):
+            return error
+        }
+    }
+    
+}
