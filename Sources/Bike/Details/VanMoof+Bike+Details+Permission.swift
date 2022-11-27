@@ -64,6 +64,17 @@ extension VanMoof.Bike.Details.Permission: Codable {
     
 }
 
+// MARK: - CustomStringConvertible
+
+extension VanMoof.Bike.Details.Permission: CustomStringConvertible {
+    
+    /// A textual representation of this instance.
+    public var description: String {
+        self.value
+    }
+    
+}
+
 // MARK: - Well-Known
 
 public extension VanMoof.Bike.Details.Permission {

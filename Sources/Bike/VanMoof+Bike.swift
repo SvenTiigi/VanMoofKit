@@ -183,3 +183,16 @@ extension VanMoof.Bike: Hashable {
     }
     
 }
+
+// MARK: - CustomStringConvertible
+
+extension VanMoof.Bike: CustomStringConvertible {
+    
+    /// A textual representation of this instance.
+    public var description: String {
+        .init(
+            describing: self.details
+        )
+    }
+    
+}
