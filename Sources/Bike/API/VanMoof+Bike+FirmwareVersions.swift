@@ -19,12 +19,12 @@ public extension VanMoof.Bike {
     
 }
 
-// MARK: - VanMoof+Bike+bikeFirmwareVersion
+// MARK: - VanMoof+Bike+firmwareVersion
 
 public extension VanMoof.Bike {
     
     /// The bike firmware version.
-    var bikeFirmwareVersion: String {
+    var firmwareVersion: String {
         get async throws {
             try await self.bluetoothManager
                 .read(

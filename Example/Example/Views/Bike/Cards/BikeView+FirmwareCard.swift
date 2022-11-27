@@ -34,7 +34,7 @@ extension BikeView.FirmwareCard: View {
                 VStack(spacing: 12) {
                     self.entry(
                         title: "Bike Firmware",
-                        detail: firmwareSummary.bikeFirmwareVersion
+                        detail: firmwareSummary.firmwareVersion
                     )
                     self.entry(
                         title: "BLE Chip",
@@ -96,7 +96,7 @@ private extension VanMoof.Bike {
     struct FirmwareSummary: Hashable {
         
         /// The bike firmware version
-        var bikeFirmwareVersion: String?
+        var firmwareVersion: String?
         
         /// The ble chip firmware version
         var bleChipFirmwareVersion: String?
@@ -104,6 +104,7 @@ private extension VanMoof.Bike {
         /// The E-Shifter firmware version
         var eShifterFirmwareVersion: String?
         
+        /// The PCBA hardware version
         var pcbaHardwareVersion: String?
         
     }
@@ -111,12 +112,12 @@ private extension VanMoof.Bike {
     /// The FirmwareSummary
     var firmwareSummary: FirmwareSummary {
         get async {
-            async let bikeFirmwareVersion = self.bikeFirmwareVersion
+            async let firmwareVersion = self.firmwareVersion
             async let bleChipFirmwareVersion = self.bleChipFirmwareVersion
             async let eShifterFirmwareVersion = self.eShifterFirmwareVersion
             async let pcbaHardwareVersion = self.pcbaHardwareVersion
             return .init(
-                bikeFirmwareVersion: try? await bikeFirmwareVersion,
+                firmwareVersion: try? await firmwareVersion,
                 bleChipFirmwareVersion: try? await bleChipFirmwareVersion,
                 eShifterFirmwareVersion: try? await eShifterFirmwareVersion,
                 pcbaHardwareVersion: try? await pcbaHardwareVersion
