@@ -50,6 +50,12 @@ extension VanMoof.Bike {
             self.setup()
         }
         
+        /// Deinit
+        deinit {
+            // Disconnect from peripheral, if needed
+            self.peripheral.flatMap(self.central.cancelPeripheralConnection)
+        }
+        
     }
     
 }
