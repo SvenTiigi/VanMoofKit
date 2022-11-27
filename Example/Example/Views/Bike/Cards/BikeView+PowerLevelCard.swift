@@ -87,8 +87,6 @@ private extension VanMoof.Bike.PowerLevel {
             return "Level 3"
         case .four:
             return "Level 4"
-        case .maximum:
-            return "Max."
         }
     }
     

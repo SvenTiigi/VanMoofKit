@@ -15,8 +15,6 @@ enum PowerLevelAppEnum: Int {
     case three
     /// Level 4
     case four
-    /// Maximum (Level 5)
-    case maximum
 }
 
 // MARK: - SpeedLimitAppEnum+AppEnum
@@ -45,9 +43,6 @@ extension PowerLevelAppEnum: AppEnum {
         ),
         .four: .init(
             title: "Level 4"
-        ),
-        .maximum: .init(
-            title: "Maximum"
         )
     ]
     

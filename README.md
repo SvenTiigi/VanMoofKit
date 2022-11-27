@@ -311,8 +311,6 @@ case .three:
     break
 case .four:
     break
-case .maximum:
-    break
 }
 
 bike.powerLevelPublisher.sink { powerLevel in

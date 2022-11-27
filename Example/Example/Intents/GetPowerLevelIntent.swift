@@ -49,8 +49,6 @@ extension GetPowerLevelIntent: AppIntent {
                 return .three
             case .four:
                 return .four
-            case .maximum:
-                return .maximum
             }
         }()
         return .result(
