@@ -100,7 +100,7 @@ public extension VanMoof.Bike {
         public let customerRoleFamily: String
         
         /// The customer role.
-        public let customerRole: String
+        public let customerRole: CustomerRole
         
         /// The permissions.
         public let permissions: [Permission]
@@ -196,7 +196,7 @@ public extension VanMoof.Bike {
             bleVersion: String?,
             messagesViaBLE: String,
             customerRoleFamily: String,
-            customerRole: String,
+            customerRole: CustomerRole,
             permissions: [Permission],
             key: Key,
             isFactoryKey: Bool,
