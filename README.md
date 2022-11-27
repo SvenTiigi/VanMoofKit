@@ -80,7 +80,7 @@ dependencies: [
 
 Or navigate to your Xcode project then select `Swift Packages`, click the “+” icon and search for `VanMoofKit`.
 
-## Usage
+## Info.plist
 
 As the VanMoofKit is using the [`CoreBluetooth`](https://developer.apple.com/documentation/corebluetooth) framework to establish a [BLE](https://wikipedia.org/wiki/Bluetooth_Low_Energy) connection to a bike the [`NSBluetoothAlwaysUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription) key needs to be added to the Info.plist of your application.
 
@@ -89,7 +89,7 @@ As the VanMoofKit is using the [`CoreBluetooth`](https://developer.apple.com/doc
 <string>Establishing a bluetooth connection to your VanMoof Bike.</string>
 ```
 
-### VanMoof
+## VanMoof
 
 To retrieve bikes of a VanMoof account you first need to initialize an instance of `VanMoof`.
 
@@ -149,7 +149,7 @@ vanMoof.logout()
 
 > Note: Logging out an user has no effect on any available VanMoof.Bike instance. It is the developer responsibility to terminate any open connection to a VanMoof.Bike.
 
-### Bike 🚲
+## VanMoof.Bike 🚲
 
 ### Details
 
@@ -166,7 +166,7 @@ print(details.frameNumber)
 print(bike.name, bike.macAddress, bike.frameNumber)
 ```
 
-#### Connection
+### Connection
 
 To establish a connection to a `VanMoof.Bike` call:
 
@@ -218,7 +218,7 @@ If you wish to terminate the connection simply call:
 try await bike.disconnect()
 ```
 
-#### Functions
+### Functions
 
 A `VanMoof.Bike` exposes various functions and properties in order to modify certain functionality as well as getting notified whenever a value changes by making use of a publisher.
 
