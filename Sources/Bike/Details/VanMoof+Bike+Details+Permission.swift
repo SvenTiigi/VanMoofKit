@@ -131,5 +131,3 @@ public extension VanMoof.Bike.Details.Permission {
     static let swapSmartmodule = "SWAP_SMARTMODULE"
     
 }
-
-
