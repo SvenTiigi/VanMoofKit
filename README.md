@@ -122,10 +122,11 @@ The login produces a `VanMoof.Token` which is automatically stored in an instanc
 let vanMoof = VanMoof(
     // Specify an instance which conforms to the `VanMoofTokenStore` protocol.
     // Predefined implementations:
-    // - UserDefaultsVanMoofTokenStore
+    // - KeychainVanMoofTokenStore
     // - UbiquitousVanMoofTokenStore (iCloud Key-Value Store)
+    // - UserDefaultsVanMoofTokenStore
     // - InMemoryVanMoofTokenStore
-    tokenStore: UserDefaultsVanMoofTokenStore()
+    tokenStore: KeychainVanMoofTokenStore()
 )
 ```
 
@@ -414,14 +415,17 @@ let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 ## Credits
 
 #### AES ECB Crypto
+
 - [CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift)
 
 #### VanMoof Bike Bluetooth API Reverse Engineering
+
 - [pymoof](https://github.com/quantsini/pymoof)
 - [vanbike-lib](https://github.com/Poket-Jony/vanbike-lib)
 - [Mooovy](https://github.com/mjarkk/vanmoof-web-controller)
 
 #### GitHub Workflow Files and Issue Templates
+
 - [Runestone](https://github.com/simonbs/Runestone)
 
 ## License

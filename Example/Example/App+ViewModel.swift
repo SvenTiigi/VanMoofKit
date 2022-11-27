@@ -21,9 +21,7 @@ extension App {
         
         /// The VanMoof instance
         private(set) lazy var vanMoof: VanMoof = {
-            let vanMoof = VanMoof(
-                tokenStore: UserDefaultsVanMoofTokenStore()
-            )
+            let vanMoof = VanMoof()
             self.vanMoofObjectWillChangeCancellable = vanMoof
                 .objectWillChange
                 .sink { [weak self] in
