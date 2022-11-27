@@ -156,7 +156,7 @@ vanMoof.logout()
 Some information such as the name of the bike, frame number, MAC address are available without an active connection to the bike. You can access those information via the `VanMoof.Bike.Details`.
 
 ```swift
-let details = bike.details
+let details: VanMoof.Bike.Details = bike.details
 print(details.name)
 print(details.macAddress)
 print(details.frameNumber)
