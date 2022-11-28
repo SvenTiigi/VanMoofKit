@@ -1,5 +1,5 @@
-import CoreBluetooth
 import Combine
+import CoreBluetooth
 import Foundation
 
 // MARK: - VanMoof+Bike
