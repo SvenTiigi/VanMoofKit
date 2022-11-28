@@ -21,7 +21,7 @@ public extension VanMoof.Bike {
         self.bluetoothManager
             .compactMap { event in
                 switch event {
-                case .didFailToConnectPeripheral(_ , let error):
+                case .didFailToConnectPeripheral(_, let error):
                     return error
                 case .didDisconnectPeripheral(_, let error):
                     return error
