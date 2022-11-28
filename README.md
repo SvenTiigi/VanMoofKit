@@ -130,6 +130,8 @@ let vanMoof = VanMoof(
 )
 ```
 
+> In default the `KeychainVanMoofTokenStore` will be used to store the `VanMoof.Token`.
+
 After the login has succeeded you can retrieve the user profile and the associated bikes.
 
 ```swift
@@ -151,9 +153,7 @@ vanMoof.logout()
 
 ## VanMoof.Bike 🚲
 
-### Details
-
-Some information such as the name of the bike, frame number, MAC address are available without an active connection to the bike. You can access those information via the `VanMoof.Bike.Details`.
+Some information such as the name of the bike, frame number and more are available without an active connection to the bike. You can access those information via the `bike.details` property.
 
 ```swift
 let details: VanMoof.Bike.Details = bike.details
@@ -171,14 +171,8 @@ print(bike.name, bike.macAddress, bike.frameNumber)
 To establish a connection to a `VanMoof.Bike` call:
 
 ```swift
-do {
-    // Try to connect to the bike
-    try await bike.connect()
-} catch let bikeError as VanMoof.Bike.Error {
-    print(bikeError.errorDescription, bikeError.underlyingError)
-} catch {
-    print(error)
-}
+// Try to connect to the bike
+try await bike.connect()
 ```
 
 You can retrieve the current state of the connection in the following way.
@@ -198,6 +192,10 @@ case .disconnecting:
     print("Disconnecting")
 }
 
+// Or make use of convience properties such as:
+let isConnected: Bool = bike.isConnected
+let isDisconnected: Bool = bike.isDiconnected
+
 // Alternatively you can use a Publisher
 bike.connectionStatePublisher
     .sink { connectionState in
@@ -211,6 +209,20 @@ bike.connectionErrorPublisher
     }
 ```
 
+Additionally, you can monitor the signal strength of the connection via:
+
+```swift
+// Retrieve the current signal strength
+let signalStrength: VanMoof.Bike.SignalStrength = try await bike.signalStrength
+
+// A Publisher that emits the current signal strength in a given update interval
+bike.signalStrengthPublisher(
+    updateInterval: 5
+).sink { signalStrength in
+    // ...
+}
+```
+
 If you wish to terminate the connection simply call:
 
 ```swift
@@ -218,11 +230,7 @@ If you wish to terminate the connection simply call:
 try await bike.disconnect()
 ```
 
-### Functions
-
-A `VanMoof.Bike` exposes various functions and properties in order to modify certain functionality as well as getting notified whenever a value changes by making use of a publisher.
-
-**ModuleState**
+### ModuleState
 
 ```swift
 switch try await bike.moduleState {
@@ -244,7 +252,7 @@ try await bike.set(moduleState: .on)
 try await bike.wakeUp()
 ```
 
-**LockState**
+### LockState
 
 ```swift
 switch try await bike.lockState {
@@ -264,18 +272,32 @@ bike.lockStatePublisher.sink { lockState in
 try await bike.unlock()
 ```
 
-**Battery Level**
+### Battery Level
 
 ```swift
-// An integer in the range from 0 to 100
-let batteryLevel: Int = try await bike.batteryLevel
+let batteryLevel = try await bike.batteryLevel
 
 bike.batteryLevelPublisher.sink { batteryLevel in
     // ...
 }
 ```
 
-**Speed Limit**
+### Battery State
+
+```swift
+switch try await bike.batteryState {
+case .notCharging;
+    break
+case .charging:
+    break
+}
+
+bike.batteryStatePublisher.sink { batteryState in
+    // ...
+}
+```
+
+### Speed Limit
 
 ```swift
 switch try await bike.speedLimit {
@@ -298,7 +320,7 @@ bike.speedLimitPublisher.sink { speedLimit in
 try await bike.set(speedLimit: .unitedStates)
 ```
 
-**Power Level**
+### Power Level
 
 ```swift
 switch try await bike.powerLevel {
@@ -321,7 +343,7 @@ bike.powerLevelPublisher.sink { powerLevel in
 try await bike.set(powerLevel: .four)
 ```
 
-**Light Mode**
+### Light Mode
 
 ```swift
 switch try await bike.lightMode {
@@ -340,7 +362,7 @@ bike.lightModePublisher.sink { lightMode in
 try await bike.set(lightMode: .alwaysOn)
 ```
 
-**Bell Sound**
+### Bell Sound
 
 ```swift
 switch try await bike.bellSound {
@@ -361,7 +383,7 @@ bike.bellSoundPublisher.sink { bellSound in
 try await bike.set(bellSound: .party)
 ```
 
-**Play Sound**
+### Play Sound
 
 ```swift
 try await bike.play(sound: .scrollingTone)
@@ -369,25 +391,24 @@ try await bike.play(sound: .beepPositive)
 try await bike.play(sound: .alarmStageOne)
 ```
 
-**Sound Volume**
+### Sound Volume
 
 ```swift
 // An integer in the range from 0 to 100
 let soundVolume: Int = try await bike.soundVolume
 ```
 
-**Total Distance**
+### Total Distance
 
 ```swift
-// Measured in kilometers
-let totalDistance: Int = try await bike.totalDistance
+let totalDistance: VanMoof.Bike.Distance = try await bike.totalDistance
 
 bike.totalDistancePublisher.sink { totalDistance in
     // ...
 }
 ```
 
-**Unit System**
+### Unit System
 
 ```swift
 switch try await bike.unitSystem {
@@ -404,10 +425,10 @@ bike.unitSystemPublisher.sink { unitSystem in
 try await bike.set(unitSystem: .metric)
 ```
 
-**Firmware Versions**
+### Firmware Versions
 
 ```swift
-let bikeFirmwareVersion: String = try await bike.bikeFirmwareVersion
+let bikeFirmwareVersion: String = try await bike.firmwareVersion
 let bleChipFirmwareVersion: String = try await bike.bleChipFirmwareVersion
 let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 ```
