@@ -126,11 +126,11 @@ let vanMoof = VanMoof(
     // - UbiquitousVanMoofTokenStore (iCloud Key-Value Store)
     // - UserDefaultsVanMoofTokenStore
     // - InMemoryVanMoofTokenStore
-    tokenStore: KeychainVanMoofTokenStore()
+    tokenStore: UserDefaultsVanMoofTokenStore()
 )
 ```
 
-> In default the `KeychainVanMoofTokenStore` will be used to store the `VanMoof.Token`.
+> In default the `UserDefaultsVanMoofTokenStore` will be used to store the `VanMoof.Token`.
 
 After the login has succeeded you can retrieve the user profile and the associated bikes.
 

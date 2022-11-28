@@ -33,13 +33,13 @@ public final class VanMoof: ObservableObject {
     /// - Parameters:
     ///   - apiURL: The VanMoof API URL. Default value `"https://my.vanmoof.com/api/v8"`
     ///   - apiKey: The VanMoof API Key. Default value `fcb38d47-f14b-30cf-843b-26283f6a5819`
-    ///   - tokenStore: The VanMoofTokenStore. Default value `KeychainVanMoofTokenStore()`
+    ///   - tokenStore: The VanMoofTokenStore. Default value `UserDefaultsVanMoofTokenStore()`
     ///   - urlSession: The URLSession. Default value `.shared`
     ///   - decoder: The JSONDecoder. Default value `.init()`
     public init(
         apiURL: URL = .init(string: "https://my.vanmoof.com/api/v8")!,
         apiKey: String = "fcb38d47-f14b-30cf-843b-26283f6a5819",
-        tokenStore: VanMoofTokenStore = KeychainVanMoofTokenStore(),
+        tokenStore: VanMoofTokenStore = UserDefaultsVanMoofTokenStore(),
         urlSession: URLSession = .shared,
         decoder: JSONDecoder = .init()
     ) {
