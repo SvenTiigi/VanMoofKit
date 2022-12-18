@@ -106,7 +106,7 @@ try await vanMoof.login(
 )
 ```
 
-> The login credentials aren't persisted or logged they are only used to authenticate against the VanMoof API.
+> **Note**: The login credentials aren't persisted or logged they are only used to authenticate against the VanMoof API.
 
 Make use of the `vanMoof.isAuthenticated` property to check if the user is already logged in.
 
@@ -130,7 +130,7 @@ let vanMoof = VanMoof(
 )
 ```
 
-> In default the `UserDefaultsVanMoofTokenStore` will be used to store the `VanMoof.Token`.
+> **Note**: In default the `UserDefaultsVanMoofTokenStore` will be used to store the `VanMoof.Token`.
 
 After the login has succeeded you can retrieve the user profile and the associated bikes.
 
@@ -149,7 +149,7 @@ To logout the current user call:
 vanMoof.logout()
 ```
 
-> Note: Logging out an user has no effect on any available VanMoof.Bike instance. It is the developer responsibility to terminate any open connection to a VanMoof.Bike.
+> **Note**: Logging out an user has no effect on any available VanMoof.Bike instance. It is the developer responsibility to terminate any open connection to a VanMoof.Bike.
 
 ## VanMoof.Bike 🚲
 
@@ -314,7 +314,7 @@ bike.speedLimitPublisher.sink { speedLimit in
 }
 ```
 
-> ⚠️ Changing the speed limit may be illegal in certain jurisdictions.
+> **Warning**: Changing the speed limit may be illegal in certain jurisdictions.
 
 ```swift
 try await bike.set(speedLimit: .unitedStates)
