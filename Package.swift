@@ -18,18 +18,9 @@ let package = Package(
             ]
         )
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/krzyzanowskim/CryptoSwift",
-            exact: "1.6.0"
-        )
-    ],
     targets: [
         .target(
             name: "VanMoofKit",
-            dependencies: [
-                "CryptoSwift"
-            ],
             path: "Sources"
         ),
         .testTarget(

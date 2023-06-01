@@ -435,10 +435,6 @@ let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 
 ## Credits
 
-#### AES ECB Crypto
-
-- [CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift)
-
 #### VanMoof Bike Bluetooth API Reverse Engineering
 
 - [pymoof](https://github.com/quantsini/pymoof)
