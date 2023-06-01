@@ -183,7 +183,7 @@ switch bike.connectionState {
 case .disconnected:
     print("Disconnected")
 case .discovering:
-    print("Disconvering / Searching")
+    print("Discovering / Searching")
 case .connecting:
     print("Connecting")
 case .connected:
