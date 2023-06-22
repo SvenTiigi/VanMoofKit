@@ -47,24 +47,13 @@ extension BikeView.LightModeCard: View {
                         Spacer()
                         VStack {
                             Spacer()
-                            Image(
-                                {
-                                    switch lightMode {
-                                    case .auto:
-                                        return "LightModeAuto"
-                                    case .alwaysOn:
-                                        return "LightModeAlwaysOn"
-                                    case .off:
-                                        return "LightModeOff"
-                                    }
-                                }()
-                            )
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 105)
-                            .offset(y: 10)
-                            .unredacted()
-                            .brightness(0.03)
+                            lightMode.image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 105)
+                                .offset(y: 10)
+                                .unredacted()
+                                .brightness(0.03)
                         }
                     }
                     HStack {
@@ -129,6 +118,21 @@ private extension VanMoof.Bike.LightMode {
             return "Always On"
         case .off:
             return "Lights off"
+        }
+    }
+    
+}
+
+private extension VanMoof.Bike.LightMode {
+    
+    var image: Image {
+        switch self {
+        case .auto:
+            return .init("LightModeAuto")
+        case .alwaysOn:
+            return .init("LightModeAlwaysOn")
+        case .off:
+            return .init("LightModeOff")
         }
     }
     
