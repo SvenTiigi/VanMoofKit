@@ -62,6 +62,13 @@ extension App: AppShortcutsProvider {
             ]
         )
         AppShortcut(
+            intent: ToggleSpeedLimitIntent(),
+            phrases: [
+                "Toggle speed limit",
+                "Reset speed limit"
+            ]
+        )
+        AppShortcut(
             intent: GetBatteryLevelIntent(),
             phrases: [
                 "Get battery level"
