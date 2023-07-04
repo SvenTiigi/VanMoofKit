@@ -29,6 +29,9 @@
    <a href="https://twitter.com/SvenTiigi/">
       <img src="https://img.shields.io/badge/Twitter-@SvenTiigi-blue.svg?style=flat" alt="Twitter">
    </a>
+   <a href="https://mastodon.world/@SvenTiigi">
+      <img src="https://img.shields.io/badge/Mastodon-@SvenTiigi-8c8dff.svg?style=flat" alt="Mastodon">
+   </a>
 </p>
 
 <img align="right" width="307" src="Assets/example-app.png" alt="Example application">
@@ -183,7 +186,7 @@ switch bike.connectionState {
 case .disconnected:
     print("Disconnected")
 case .discovering:
-    print("Discovering / Searching")
+    print("Discovering")
 case .connecting:
     print("Connecting")
 case .connected:
@@ -194,7 +197,7 @@ case .disconnecting:
 
 // Or make use of convience properties such as:
 let isConnected: Bool = bike.isConnected
-let isDisconnected: Bool = bike.isDiconnected
+let isDisconnected: Bool = bike.isDisconnected
 
 // Alternatively you can use a Publisher
 bike.connectionStatePublisher
