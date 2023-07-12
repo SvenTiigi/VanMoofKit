@@ -69,7 +69,13 @@ extension VanMoofCLI {
             if let outputDirectoryURLString = self.parameters["outputDirectory"]?
                 .replacingOccurrences(
                     of: "~",
-                    with: FileManager.default.homeDirectoryForCurrentUser.path
+                    with: {
+                        #if os(macOS)
+                        return FileManager.default.homeDirectoryForCurrentUser.path
+                        #else
+                        return ""
+                        #endif
+                    }()
                 ) {
                 return URL(fileURLWithPath: outputDirectoryURLString)
             } else {
