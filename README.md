@@ -436,6 +436,16 @@ let bleChipFirmwareVersion: String = try await bike.bleChipFirmwareVersion
 let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 ```
 
+## VanMoof CLI
+
+Additionally, The VanMoofKit Swift Package provides a CLI which allows you to easily export your VanMoof account data including the encryption keys of your bikes.
+
+```bash
+$ swift run vanmoof export --username "knight.rider@vanmoof.com" --password "********" --outputDirectory "~/Download"
+```
+
+> **Note**: The `--outputDirectory` is optional. If not provided the export will be automatically located at `~/Desktop`
+
 ## Credits
 
 #### VanMoof Bike Bluetooth API Reverse Engineering

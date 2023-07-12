@@ -16,19 +16,29 @@ let package = Package(
             targets: [
                 "VanMoofKit"
             ]
+        ),
+        .executable(
+            name: "vanmoof",
+            targets: [
+                "VanMoofCLI"
+            ]
         )
     ],
     targets: [
         .target(
-            name: "VanMoofKit",
-            path: "Sources"
+            name: "VanMoofKit"
+        ),
+        .executableTarget(
+            name: "VanMoofCLI",
+            dependencies: [
+                "VanMoofKit"
+            ]
         ),
         .testTarget(
             name: "VanMoofKitTests",
             dependencies: [
                 "VanMoofKit"
-            ],
-            path: "Tests"
+            ]
         )
     ]
 )
