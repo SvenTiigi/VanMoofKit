@@ -89,17 +89,13 @@ extension VanMoofCLI {
                     )
             }
         }()
-        .appendingPathComponent(
-            "VanMoof-Export",
-            isDirectory: true
-        )
         print("Starting export...")
         do {
             try await self.vanMoof.login(
                 username: username,
                 password: password
             )
-            let user = try await self.vanMoof.user()
+            let userData = try await self.vanMoof.userData()
             try FileManager
                 .default
                 .createDirectory(
@@ -113,19 +109,11 @@ extension VanMoofCLI {
                 .prettyPrinted
             ]
             try jsonEncoder
-                .encode(user)
+                .encode(userData)
                 .write(
                     to: outputDirectoryURL
-                        .appendingPathComponent("User.json")
+                        .appendingPathComponent("VanMoof-Export.json")
                 )
-            for bike in user.bikes {
-                try jsonEncoder
-                    .encode(bike)
-                    .write(
-                        to: outputDirectoryURL
-                            .appendingPathComponent("\(bike.name).json")
-                    )
-            }
         } catch {
             print("The export failed. \(error)")
             throw error

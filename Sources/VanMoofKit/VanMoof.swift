@@ -135,14 +135,30 @@ public extension VanMoof {
 
 public extension VanMoof {
     
-    /// Retrieve the VanMoof User which is currently authenticated
+    /// Retrieve the currently authenticated VanMoof User.
     /// - Returns: The User
     func user() async throws -> User {
-        /// Retrieve the VanMoof User
+        /// The ResponseBody
+        struct ResponseBody: Codable {
+            /// The User
+            let data: User
+        }
+        // Try to decode user data as ResponseBody to access the user
+        return try self.decoder
+            .decode(
+                ResponseBody.self,
+                from: await self.userData()
+            )
+            .data
+    }
+    
+    /// Retrieve the VanMoof User Data of the currently authenticated user.
+    func userData() async throws -> Data {
+        /// Retrieve the VanMoof User Data
         /// - Parameter refreshedToken: The optional refreshed Token. Default value `nil`
-        func user(
+        func userData(
             refreshedToken: Token? = nil
-        ) async throws -> User {
+        ) async throws -> Data {
             // Verify token is available
             guard let token = self.tokenStore.token else {
                 // Otherwise throw error
@@ -161,22 +177,17 @@ public extension VanMoof {
             // Check if should refresh the token if needed and status code is `401`
             if refreshedToken == nil, (response as? HTTPURLResponse)?.statusCode == 401 {
                 // Return user without refreshing token again
-                return try await user(
+                return try await userData(
                     refreshedToken: self.refresh(
                         token: token
                     )
                 )
             }
-            /// The ResponseBody
-            struct ResponseBody: Codable {
-                /// The User
-                let data: User
-            }
-            // Try to decode data as ResponseBody to access the user
-            return try self.decoder.decode(ResponseBody.self, from: data).data
+            // Return user data
+            return data
         }
-        // Return user
-        return try await user()
+        // Return user data
+        return try await userData()
     }
     
 }
