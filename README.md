@@ -89,7 +89,7 @@ To integrate using Apple's [Swift Package Manager](https://swift.org/package-man
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SvenTiigi/VanMoofKit.git", from: "0.0.2")
+    .package(url: "https://github.com/SvenTiigi/VanMoofKit.git", from: "0.0.3")
 ]
 ```
 
