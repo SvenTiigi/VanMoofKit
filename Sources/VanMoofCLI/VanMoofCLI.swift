@@ -27,7 +27,10 @@ extension VanMoofCLI {
         // Verify CLI can be initialized from arguments
         guard let cli = CommandLine.arguments().flatMap(VanMoofCLI.init) else {
             // Otherwise exit with failure
-            fatalError("Please add a command for example: \"vanmoof export\"")
+            exit(
+                code: EXIT_FAILURE,
+                message: "Please specify a command for example: \"vanmoof export\""
+            )
         }
         // Execute CLI
         try await cli()
@@ -46,8 +49,11 @@ extension VanMoofCLI {
             // Export
             try await self.export()
         default:
-            // Otherwise exit with failure
-            fatalError("Unsupported command: \(command)")
+            // Exit with failure
+            exit(
+                code: EXIT_FAILURE,
+                message: "Unsupported command: \(self.command)"
+            )
         }
     }
     
@@ -59,12 +65,24 @@ extension VanMoofCLI {
     
     /// Export VanMoof Data
     func export() async throws {
+        // Verify username is available
         guard let username = self.parameters["username"] else {
-            fatalError("Please specify your username via \"--username knight.rider@vanmoof.com\"")
+            // Otherwise exit with failure
+            exit(
+                code: EXIT_FAILURE,
+                message: "Please specify a username via \"--username knight.rider@vanmoof.com\""
+            )
         }
+        // Verify password is available
         guard let password = self.parameters["password"] else {
-            fatalError("Please specify your password via \"--password ********\"")
+            // Otherwise exit with failure
+            exit(
+                code: EXIT_FAILURE,
+                message: "Please specify a password via \"--password ********\""
+            )
         }
+        // Initialize outpur directory url either by using the specified output directory
+        // or when the parameter is unavailable the desktop directory
         let outputDirectoryURL: URL = try {
             if let outputDirectoryURLString = self.parameters["outputDirectory"]?
                 .replacingOccurrences(
@@ -89,36 +107,49 @@ extension VanMoofCLI {
                     )
             }
         }()
+        // Initialize the file url
+        let fileURL = outputDirectoryURL.appendingPathComponent("VanMoof-Export.json")
         print("Starting export...")
         do {
-            try await self.vanMoof.login(
-                username: username,
-                password: password
-            )
-            let userData = try await self.vanMoof.userData()
+            // Create the output directory url
             try FileManager
                 .default
                 .createDirectory(
                     at: outputDirectoryURL,
                     withIntermediateDirectories: true
                 )
-            let jsonEncoder = JSONEncoder()
-            jsonEncoder.outputFormatting = [
-                .withoutEscapingSlashes,
-                .sortedKeys,
-                .prettyPrinted
-            ]
-            try jsonEncoder
-                .encode(userData)
+            // Try to login
+            try await self.vanMoof.login(
+                username: username,
+                password: password
+            )
+            // Try to retrieve the user data
+            let userData = try await self.vanMoof.userData()
+            // Serialize json and write data to file
+            try JSONSerialization
+                .data(
+                    withJSONObject: JSONSerialization
+                        .jsonObject(with: userData),
+                    options: [
+                        .prettyPrinted,
+                        .sortedKeys,
+                        .withoutEscapingSlashes
+                    ]
+                )
                 .write(
-                    to: outputDirectoryURL
-                        .appendingPathComponent("VanMoof-Export.json")
+                    to: fileURL
                 )
         } catch {
-            print("The export failed. \(error)")
-            throw error
+            // Exit with failure
+            exit(
+                code: EXIT_FAILURE,
+                message: "The export failed: \(error)"
+            )
         }
-        print("Export successfully saved at \(outputDirectoryURL)")
+        // Exit with success
+        exit(
+            message: "Export successfully saved at \(fileURL.path)"
+        )
     }
     
 }
@@ -130,19 +161,24 @@ private extension CommandLine {
     /// Extracts command and parameters from the given arguments.
     /// - Returns: A tuple containing the command and parameters, or `nil` if no command is found.
     static func arguments() -> (command: String, parameters: [String: String])? {
+        // Drop first argument which is the path of the executable
         let arguments = self.arguments.dropFirst()
+        // Verify a command is available
         guard let command = arguments.first else {
+            // Otherwise return nil
             return nil
         }
+        // Return arguments including command and parameters
         return (
             command: command,
             parameters: {
                 var parameters = [String: String]()
+                let parameterPrefix = "--"
                 var currentParameterName: String?
                 for argument in arguments.dropFirst() {
-                    if argument.hasPrefix("--") {
+                    if argument.hasPrefix(parameterPrefix) {
                         currentParameterName = argument
-                            .replacingOccurrences(of: "--", with: "")
+                            .replacingOccurrences(of: parameterPrefix, with: String())
                             .trimmingCharacters(in: .whitespaces)
                         continue
                     }
@@ -156,4 +192,18 @@ private extension CommandLine {
         )
     }
     
+}
+
+// MARK: - Exit
+
+/// Exit program.
+/// - Parameters:
+///   - code: The termination code.
+///   - message: The optional message. Default value `nil`
+func exit(
+    code: Int32 = EXIT_SUCCESS,
+    message: String? = nil
+) -> Never {
+    message.flatMap { print($0) }
+    exit(code)
 }

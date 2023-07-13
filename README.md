@@ -69,6 +69,18 @@ for bike in bikes {
 
 Check out the example application to see VanMoofKit in action. Simply open the `Example/Example.xcodeproj` and run the "Example" scheme.
 
+## CLI
+
+The VanMoofKit Swift Package includes a CLI that allows you to easily export your VanMoof account data including the encryption keys of your bikes.
+
+```bash
+$ swift run vanmoof export --username "knight.rider@vanmoof.com" --password "********" --outputDirectory "~/Downloads"
+```
+
+> **Note**: The login credentials aren't persisted or logged they are only used to authenticate against the VanMoof API.
+
+The `--outputDirectory` parameter is optional. If not specified, the export will automatically be saved at `~/Desktop`
+
 ## Installation
 
 ### Swift Package Manager
@@ -167,6 +179,17 @@ print(details.frameNumber)
 // Or access the details properties directly
 // (powered by the @dynamicMemberLookup attribute)
 print(bike.name, bike.macAddress, bike.frameNumber)
+```
+
+As a `VanMoof.Bike` is conform to the [`Codable`](https://developer.apple.com/documentation/swift/codable) protocol you can create an instance from a local JSON file.
+
+```swift
+// Retrieve the JSON file url from the main bundle
+let bikeJSONFileURL = Bundle.main.url(forResource: "Bike", withExtension: "json")!
+// Try to load the contents of the JSON file
+let bikeJSONData = try Data(contentsOf: bikeJSONFileURL)
+// Try to decode VanMoof Bike from JSON data
+let bike: VanMoof.Bike = try JSONDecoder().decode(VanMoof.Bike.self, from: bikeJSONData)
 ```
 
 ### Connection
@@ -435,16 +458,6 @@ let bikeFirmwareVersion: String = try await bike.firmwareVersion
 let bleChipFirmwareVersion: String = try await bike.bleChipFirmwareVersion
 let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 ```
-
-## VanMoof CLI
-
-Additionally, The VanMoofKit Swift Package provides a CLI which allows you to easily export your VanMoof account data including the encryption keys of your bikes.
-
-```bash
-$ swift run vanmoof export --username "knight.rider@vanmoof.com" --password "********" --outputDirectory "~/Download"
-```
-
-> **Note**: The `--outputDirectory` is optional. If not provided the export will be automatically located at `~/Desktop`
 
 ## Credits
 
