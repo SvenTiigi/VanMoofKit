@@ -51,9 +51,6 @@ public extension VanMoof.Bike {
         /// Bool value if tracking is active.
         public let isTracking: Bool
         
-        /// The highest available speed limit.
-        public let highestAvailableSpeedLimit: Int?
-        
         /// Bool value if a message is available.
         public let messageAvailable: Bool
         
@@ -141,7 +138,6 @@ public extension VanMoof.Bike {
         ///   - smartmoduleDesiredVersion: The smart module desired version.
         ///   - changeBackupCode: Bool if backup code has changed.
         ///   - isTracking: Bool value if tracking is active.
-        ///   - highestAvailableSpeedLimit: The highest available speed limit.
         ///   - messageAvailable: Bool value if a message is available.
         ///   - modelName: The model name.
         ///   - modelDetails: The model details.
@@ -180,7 +176,6 @@ public extension VanMoof.Bike {
             smartmoduleDesiredVersion: String?,
             changeBackupCode: Bool,
             isTracking: Bool,
-            highestAvailableSpeedLimit: Int?,
             messageAvailable: Bool,
             modelName: String,
             modelDetails: ModelDetails,
@@ -219,7 +214,6 @@ public extension VanMoof.Bike {
             self.smartmoduleDesiredVersion = smartmoduleDesiredVersion
             self.changeBackupCode = changeBackupCode
             self.isTracking = isTracking
-            self.highestAvailableSpeedLimit = highestAvailableSpeedLimit
             self.messageAvailable = messageAvailable
             self.modelName = modelName
             self.modelDetails = modelDetails
