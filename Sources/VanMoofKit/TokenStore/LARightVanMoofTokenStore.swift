@@ -1,3 +1,4 @@
+#if os(iOS) || os(macOS)
 import Foundation
 import LocalAuthentication
 
@@ -152,3 +153,4 @@ public extension VanMoofTokenStore where Self == LARightVanMoofTokenStore {
     }
     
 }
+#endif
