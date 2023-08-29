@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 
 // MARK: - VanMoof
@@ -27,38 +28,70 @@ public final class VanMoof: ObservableObject {
     /// The JSONDecoder.
     public var decoder: JSONDecoder
     
+    /// The VanMoofTokenStore will change cancellable.
+    private var vanMoofTokenStoreWillChangeCancellable: AnyCancellable?
+    
     // MARK: Initializer
     
     /// Creates a new instance of `VanMoof`
     /// - Parameters:
     ///   - apiURL: The VanMoof API URL. Default value `"https://my.vanmoof.com/api/v8"`
     ///   - apiKey: The VanMoof API Key. Default value `fcb38d47-f14b-30cf-843b-26283f6a5819`
-    ///   - tokenStore: The VanMoofTokenStore. Default value `UserDefaultsVanMoofTokenStore()`
+    ///   - tokenStore: The VanMoofTokenStore. Default value `.userDefaults()`
     ///   - urlSession: The URLSession. Default value `.shared`
     ///   - decoder: The JSONDecoder. Default value `.init()`
     public init(
         apiURL: URL = .init(string: "https://my.vanmoof.com/api/v8")!,
         apiKey: String = "fcb38d47-f14b-30cf-843b-26283f6a5819",
-        tokenStore: VanMoofTokenStore = UserDefaultsVanMoofTokenStore(),
+        tokenStore: VanMoofTokenStore = .userDefaults(),
         urlSession: URLSession = .shared,
         decoder: JSONDecoder = .init()
     ) {
+        let tokenStore = ObservableObjectVanMoofTokenMediator(tokenStore)
         self.apiURL = apiURL
         self.apiKey = apiKey
         self.tokenStore = tokenStore
         self.urlSession = urlSession
         self.decoder = decoder
+        // Subscribe to object will change on VanMoofTokenStore
+        self.vanMoofTokenStoreWillChangeCancellable = tokenStore
+            .objectWillChange
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                // Redirect changes
+                self?.objectWillChange.send()
+            }
     }
     
 }
 
-// MARK: - Is Authenticated
+// MARK: - AuthenticationState
 
 public extension VanMoof {
     
-    /// Bool value if user is authenticated / logged in
-    var isAuthenticated: Bool {
-        self.tokenStore.token != nil
+    /// The authentication state.
+    var authenticationState: AuthenticationState {
+        get async {
+            .init(token: try? await self.tokenStore.token())
+        }
+    }
+    
+    /// A publisher that emits the current state of authentication.
+    var authenticationStatePublisher: some Publisher<AuthenticationState, Never> {
+        Just(())
+            .merge(with: self.objectWillChange)
+            .flatMap {
+                Future { promise in
+                    Task { [weak self] in
+                        guard let self = self else {
+                            return promise(.success(nil))
+                        }
+                        promise(.success(await self.authenticationState))
+                    }
+                }
+            }
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
     }
     
 }
@@ -105,12 +138,7 @@ public extension VanMoof {
         // Try to decode token
         let token = try self.decoder.decode(Token.self, from: data)
         // Set Token
-        try self.tokenStore.set(token: token)
-        // Run on MainActor
-        await MainActor.run { [weak self] in
-            // Send object will change
-            self?.objectWillChange.send()
-        }
+        try await self.tokenStore.save(token: token)
         // Return token
         return token
     }
@@ -122,11 +150,9 @@ public extension VanMoof {
 public extension VanMoof {
     
     /// Logout the user
-    func logout() {
-        // Remove Token
-        self.tokenStore.remove()
-        // Send object will change
-        self.objectWillChange.send()
+    func logout() async throws {
+        // Remove token
+        try await self.tokenStore.removeToken()
     }
     
 }
@@ -160,7 +186,7 @@ public extension VanMoof {
             refreshedToken: Token? = nil
         ) async throws -> Data {
             // Verify token is available
-            guard let token = self.tokenStore.token else {
+            guard let token = try await self.tokenStore.token() else {
                 // Otherwise throw error
                 throw Token.MissingError()
             }
@@ -228,7 +254,7 @@ public extension VanMoof {
         // Try to decode token
         let newToken = try self.decoder.decode(Token.self, from: data)
         // Try to set token
-        try self.tokenStore.set(token: token)
+        try await self.tokenStore.save(token: token)
         // Return token
         return newToken
     }
@@ -284,34 +310,33 @@ private extension URLRequest {
             apiKey,
             forHTTPHeaderField: "Api-Key"
         )
-        switch authorization {
-        case .basic(let credentials):
-            self.setValue(
-                [
-                    "Basic",
-                    Data(
-                        [
-                            credentials.username,
-                            credentials.password
-                        ]
-                        .joined(separator: ":")
-                        .utf8
-                    )
-                    .base64EncodedString()
-                ]
-                .joined(separator: " "),
-                forHTTPHeaderField: "Authorization"
-            )
-        case .bearerToken(let token):
-            self.setValue(
-                [
-                    "Bearer",
-                    token
-                ]
-                .joined(separator: " "),
-                forHTTPHeaderField: "Authorization"
-            )
-        }
+        self.setValue(
+            {
+                switch authorization {
+                case .basic(let credentials):
+                    return [
+                        "Basic",
+                        Data(
+                            [
+                                credentials.username,
+                                credentials.password
+                            ]
+                            .joined(separator: ":")
+                            .utf8
+                        )
+                        .base64EncodedString()
+                    ]
+                    .joined(separator: " ")
+                case .bearerToken(let token):
+                    return [
+                        "Bearer",
+                        token
+                    ]
+                    .joined(separator: " ")
+                }
+            }(),
+            forHTTPHeaderField: "Authorization"
+        )
     }
     
 }

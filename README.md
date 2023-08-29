@@ -138,10 +138,11 @@ let vanMoof = VanMoof(
     // Specify an instance which conforms to the `VanMoofTokenStore` protocol.
     // Predefined implementations:
     // - KeychainVanMoofTokenStore
-    // - UbiquitousVanMoofTokenStore (iCloud Key-Value Store)
+    // - LARightVanMoofTokenStore
+    // - NSUbiquitousVanMoofTokenStore
     // - UserDefaultsVanMoofTokenStore
     // - InMemoryVanMoofTokenStore
-    tokenStore: UserDefaultsVanMoofTokenStore()
+    tokenStore: .keychain()
 )
 ```
 

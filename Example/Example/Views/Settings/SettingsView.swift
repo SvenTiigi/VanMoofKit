@@ -80,7 +80,9 @@ extension SettingsView: View {
             titleVisibility: .visible
         ) {
             Button(role: .destructive) {
-                self.vanMoof.logout()
+                Task {
+                    try? await self.vanMoof.logout()
+                }
             } label: {
                 Text(verbatim: "Logout")
             }
