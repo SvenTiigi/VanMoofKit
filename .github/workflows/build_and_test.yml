@@ -4,19 +4,19 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'Sources/**'
-      - 'Tests/**'
-      - '!Sources/VanMoofKit/Documentation.docc/**'
+      - "Sources/**"
+      - "Tests/**"
+      - "!Sources/VanMoofKit/Documentation.docc/**"
   pull_request:
     paths:
-      - 'Sources/**'
-      - 'Tests/**'
-      - '!Sources/VanMoofKit/Documentation.docc/**'
+      - "Sources/**"
+      - "Tests/**"
+      - "!Sources/VanMoofKit/Documentation.docc/**"
 
 jobs:
   iOS:
     name: Build and test on iOS
-    runs-on: macOS-12
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build
@@ -34,7 +34,7 @@ jobs:
         run: swift test -v
   watchOS:
     name: Build and test on watchOS
-    runs-on: macOS-12
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build
@@ -43,7 +43,7 @@ jobs:
         run: xcodebuild test-without-building -scheme VanMoofKit-Package -destination 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm)'
   tvOS:
     name: Build and test on tvOS
-    runs-on: macOS-12
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build
