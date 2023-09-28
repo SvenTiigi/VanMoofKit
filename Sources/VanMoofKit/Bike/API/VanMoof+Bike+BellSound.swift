@@ -77,3 +77,22 @@ public extension VanMoof.Bike {
     }
     
 }
+
+// MARK: - VanMoof+Bike+replace(bellSound:)
+
+public extension VanMoof.Bike {
+    
+    /// Replace a bell sound with a custom bell sound.
+    /// - Parameters:
+    ///   - bellSound: The bell sound to replace.
+    ///   - customBellSound: A URL pointing to an audio file which should be used to replace the bell sound with.
+    ///   - fileManager: The FileManager. Default value `.default`
+    func replace(
+        bellSound: BellSound,
+        withCustomBellSound customBellSound: URL,
+        using fileManager: FileManager = .default
+    ) async throws {
+        #warning("Implement me")
+    }
+
+}
