@@ -17,6 +17,8 @@ public extension VanMoof.Bike {
         case three
         /// Level 4
         case four
+        /// Level 4
+        case five
     }
     
 }
