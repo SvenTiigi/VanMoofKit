@@ -7,12 +7,15 @@ public extension VanMoof.Bike {
     
     /// A VanMoof Bike SpeedLimit
     enum SpeedLimit: Int, Codable, Hashable, CaseIterable, Sendable {
+        /// Japan (JP) | `24 km/h`
+        case japan
+        /// Offroad  | `37 km/h`
         /// Europe (EU) | `25 km/h`
         case europe
         /// United States (US) | `32 km/h`
         case unitedStates
-        /// Japan (JP) | `24 km/h`
-        case japan
+        /// Offroad  | `37 km/h`
+        case offroad
     }
     
 }
@@ -30,6 +33,8 @@ public extension VanMoof.Bike.SpeedLimit {
             return "🇺🇸"
         case .japan:
             return "🇯🇵"
+        case .offroad:
+            return "🇳🇱"
         }
     }
     
@@ -39,14 +44,18 @@ public extension VanMoof.Bike.SpeedLimit {
 
 public extension VanMoof.Bike.SpeedLimit {
     
+    /// Japan (JP) | `24 km/h`
+    static let jp: Self = .japan
     /// Europe (EU) | `25 km/h`
     static let eu: Self = .europe
     
     /// United States (US) | `32 km/h`
     static let us: Self = .unitedStates
     
-    /// Japan (JP) | `24 km/h`
-    static let jp: Self = .japan
+    
+    
+    
+    static let of: Self = .offroad
     
 }
 
@@ -62,12 +71,14 @@ public extension VanMoof.Bike.SpeedLimit {
         .init(
             value: {
                 switch self {
+                case .japan:
+                    return 24
                 case .europe:
                     return 25
                 case .unitedStates:
                     return 32
-                case .japan:
-                    return 24
+                case .offroad:
+                    return 37
                 }
             }(),
             unit: .kilometersPerHour
