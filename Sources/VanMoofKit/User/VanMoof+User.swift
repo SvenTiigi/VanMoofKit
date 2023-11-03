@@ -85,4 +85,35 @@ extension VanMoof.User: Codable {
         case bikes = "bikeDetails"
     }
     
+    /// Creates a new instance of `VanMoof.User`
+    /// - Parameter decoder: The decoder.
+    public init(
+        from decoder: Decoder
+    ) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        try self.init(
+            id: container.decode(String.self, forKey: .id),
+            name: container.decode(String.self, forKey: .name),
+            confirmed: container.decode(Bool.self, forKey: .confirmed),
+            privacyPolicyAccepted: container.decode(Bool.self, forKey: .privacyPolicyAccepted),
+            phone: container.decode(String.self, forKey: .phone),
+            country: container.decode(String.self, forKey: .country),
+            hasPendingBikeSharingInvitations: container.decode(Bool.self, forKey: .hasPendingBikeSharingInvitations),
+            bikes: {
+                var container = try container.nestedUnkeyedContainer(forKey: .bikes)
+                var bikes = [VanMoof.Bike]()
+                while !container.isAtEnd {
+                    do {
+                        let bike = try container.decode(VanMoof.Bike.self)
+                        bikes.append(bike)
+                    } catch {
+                        struct AnyDecodable: Decodable {}
+                        _ = try? container.decode(AnyDecodable.self)
+                    }
+                }
+                return bikes
+            }()
+        )
+    }
+    
 }
