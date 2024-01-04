@@ -276,8 +276,25 @@ private extension URLRequest {
     /// A Path
     enum Path: String {
         case authenticate
-        case customerData = "getCustomerData?includeBikeDetails"
+        case customerData = "getCustomerData"
         case token
+        
+        /// The query items, if any.
+        var queryItems: [URLQueryItem]? {
+            switch self {
+            case .authenticate:
+                return nil
+            case .customerData:
+                return [
+                    .init(
+                        name: "includeBikeDetails",
+                        value: nil
+                    )
+                ]
+            case .token:
+                return nil
+            }
+        }
     }
     
     /// The Authorization
@@ -301,9 +318,21 @@ private extension URLRequest {
         method: HTTPMethod,
         apiKey: String,
         authorization: Authorization
-    ) {
+    ) throws {
+        guard let url: URL = {
+            var urlComponents = URLComponents(
+                url: url.appendingPathComponent(path.rawValue),
+                resolvingAgainstBaseURL: true
+            )
+            if let queryItems = path.queryItems {
+                urlComponents?.queryItems = queryItems
+            }
+            return urlComponents?.url
+        }() else {
+            throw URLError(.badURL)
+        }
         self.init(
-            url: url.appendingPathComponent(path.rawValue)
+            url: url
         )
         self.httpMethod = method.rawValue
         self.setValue(
