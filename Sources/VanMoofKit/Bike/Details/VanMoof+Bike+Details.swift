@@ -19,7 +19,7 @@ public extension VanMoof.Bike {
         public let frameNumber: String
         
         /// The bike identifier.
-        public let bikeId: String
+        public let bikeId: String?
         
         /// The frame serial.
         public let frameSerial: String?
@@ -91,10 +91,10 @@ public extension VanMoof.Bike {
         public let bleVersion: String?
         
         /// The messages via bluetooth.
-        public let messagesViaBLE: String
+        public let messagesViaBLE: String?
         
         /// The customer role family.
-        public let customerRoleFamily: String
+        public let customerRoleFamily: String?
         
         /// The customer role.
         public let customerRole: CustomerRole
@@ -106,13 +106,13 @@ public extension VanMoof.Bike {
         public let key: Key
         
         /// Bool value if is factory key.
-        public let isFactoryKey: Bool
+        public let isFactoryKey: Bool?
         
         /// The count of customers.
-        public let customerCount: Int
+        public let customerCount: Int?
         
         /// The count of invitations.
-        public let invitationCount: Int
+        public let invitationCount: Int?
         
         /// Bool value if peace of mind is available.
         public let hasPeaceOfMind: Bool
@@ -165,7 +165,7 @@ public extension VanMoof.Bike {
             id: Int,
             name: String,
             frameNumber: String,
-            bikeId: String,
+            bikeId: String?,
             frameSerial: String?,
             ownerName: String,
             tripDistance: Int,
@@ -189,14 +189,14 @@ public extension VanMoof.Bike {
             speaker: Bool,
             bleProfile: String,
             bleVersion: String?,
-            messagesViaBLE: String,
-            customerRoleFamily: String,
+            messagesViaBLE: String?,
+            customerRoleFamily: String?,
             customerRole: CustomerRole,
             permissions: [Permission],
             key: Key,
-            isFactoryKey: Bool,
-            customerCount: Int,
-            invitationCount: Int,
+            isFactoryKey: Bool?,
+            customerCount: Int?,
+            invitationCount: Int?,
             hasPeaceOfMind: Bool,
             links: Links?
         ) {

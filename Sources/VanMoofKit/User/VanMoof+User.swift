@@ -19,7 +19,7 @@ public extension VanMoof {
         public let confirmed: Bool
         
         /// Bool value if privacy policy is accepted by the user.
-        public let privacyPolicyAccepted: Bool
+        public let privacyPolicyAccepted: Bool?
         
         /// The phone number.
         public let phone: String
@@ -28,7 +28,7 @@ public extension VanMoof {
         public let country: String
         
         /// Bool value if the user has pending bike sharing invitations.
-        public let hasPendingBikeSharingInvitations: Bool
+        public let hasPendingBikeSharingInvitations: Bool?
         
         /// The Bikes of the user.
         public let bikes: [Bike]
@@ -49,10 +49,10 @@ public extension VanMoof {
             id: String,
             name: String,
             confirmed: Bool,
-            privacyPolicyAccepted: Bool,
+            privacyPolicyAccepted: Bool?,
             phone: String,
             country: String,
-            hasPendingBikeSharingInvitations: Bool,
+            hasPendingBikeSharingInvitations: Bool?,
             bikes: [Bike]
         ) {
             self.id = id
@@ -95,10 +95,10 @@ extension VanMoof.User: Codable {
             id: container.decode(String.self, forKey: .id),
             name: container.decode(String.self, forKey: .name),
             confirmed: container.decode(Bool.self, forKey: .confirmed),
-            privacyPolicyAccepted: container.decode(Bool.self, forKey: .privacyPolicyAccepted),
+            privacyPolicyAccepted: container.decodeIfPresent(Bool.self, forKey: .privacyPolicyAccepted),
             phone: container.decode(String.self, forKey: .phone),
             country: container.decode(String.self, forKey: .country),
-            hasPendingBikeSharingInvitations: container.decode(Bool.self, forKey: .hasPendingBikeSharingInvitations),
+            hasPendingBikeSharingInvitations: container.decodeIfPresent(Bool.self, forKey: .hasPendingBikeSharingInvitations),
             bikes: {
                 var container = try container.nestedUnkeyedContainer(forKey: .bikes)
                 var bikes = [VanMoof.Bike]()
