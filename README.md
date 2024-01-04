@@ -56,6 +56,7 @@ for bike in bikes {
 
 ## Disclaimer
 
+> [!IMPORTANT]
 > VanMoofKit is not an official library of [VanMoof B.V](https://vanmoof.com). This Swift Package makes certain features of the bike accessible which may be illegal to use in certain jurisdictions. As this library hasn't reached an official stable version some features are not yet available or may not working as expected.
 
 ## Features
@@ -77,7 +78,8 @@ The VanMoofKit Swift Package includes a CLI that allows you to easily export you
 $ swift run vanmoof export --username "knight.rider@vanmoof.com" --password "********" --outputDirectory "~/Downloads"
 ```
 
-> **Note**: The login credentials aren't persisted or logged they are only used to authenticate against the VanMoof API.
+> [!NOTE]
+> The login credentials aren't persisted or logged they are only used to authenticate against the VanMoof API.
 
 The `--outputDirectory` parameter is optional. If not specified, the export will automatically be saved at `~/Desktop`
 
@@ -89,7 +91,7 @@ To integrate using Apple's [Swift Package Manager](https://swift.org/package-man
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SvenTiigi/VanMoofKit.git", from: "0.0.4")
+    .package(url: "https://github.com/SvenTiigi/VanMoofKit.git", from: "0.0.5")
 ]
 ```
 
@@ -121,7 +123,8 @@ try await vanMoof.login(
 )
 ```
 
-> **Note**: The login credentials aren't persisted or logged they are only used to authenticate against the VanMoof API.
+> [!NOTE]
+> The login credentials aren't persisted or logged they are only used to authenticate against the VanMoof API.
 
 Make use of the `vanMoof.isAuthenticated` property to check if the user is already logged in.
 
@@ -146,7 +149,8 @@ let vanMoof = VanMoof(
 )
 ```
 
-> **Note**: In default the `UserDefaultsVanMoofTokenStore` will be used to store the `VanMoof.Token`.
+> [!NOTE]
+> In default the `UserDefaultsVanMoofTokenStore` will be used to store the `VanMoof.Token`.
 
 After the login has succeeded you can retrieve the user profile and the associated bikes.
 
@@ -165,7 +169,8 @@ To logout the current user call:
 vanMoof.logout()
 ```
 
-> **Note**: Logging out an user has no effect on any available VanMoof.Bike instance. It is the developer responsibility to terminate any open connection to a VanMoof.Bike.
+> [!NOTE]
+> Logging out an user has no effect on any available VanMoof.Bike instance. It is the developer responsibility to terminate any open connection to a VanMoof.Bike.
 
 ## VanMoof.Bike 🚲
 
@@ -341,7 +346,8 @@ bike.speedLimitPublisher.sink { speedLimit in
 }
 ```
 
-> **Warning**: Changing the speed limit may be illegal in certain jurisdictions.
+> [!WARNING]
+> Changing the speed limit may be illegal in certain jurisdictions.
 
 ```swift
 try await bike.set(speedLimit: .unitedStates)
@@ -471,28 +477,3 @@ let eShifterFirmwareVersion: String = try await bike.eShifterFirmwareVersion
 #### GitHub Workflow Files and Issue Templates
 
 - [Runestone](https://github.com/simonbs/Runestone)
-
-## License
-
-```
-VanMoofKit
-Copyright (c) 2023 Sven Tiigi sven.tiigi@gmail.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
