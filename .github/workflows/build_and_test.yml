@@ -16,7 +16,7 @@ on:
 jobs:
   iOS:
     name: Build and test on iOS
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v3
       - name: Build
@@ -25,7 +25,7 @@ jobs:
         run: xcodebuild test-without-building -scheme VanMoofKit-Package -destination 'platform=iOS Simulator,name=iPhone 14'
   watchOS:
     name: Build and test on watchOS
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v3
       - name: Build
@@ -34,7 +34,7 @@ jobs:
         run: xcodebuild test-without-building -scheme VanMoofKit-Package -destination 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm)'
   tvOS:
     name: Build and test on tvOS
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v3
       - name: Build
