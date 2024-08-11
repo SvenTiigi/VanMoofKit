@@ -182,11 +182,6 @@ extension VanMoof.Bike.BluetoothManager {
                     // Return out of function
                     return
                 }
-            case .didDisconnectPeripheral(_, let error):
-                // Throw error
-                throw VanMoof.Bike.Error(
-                    underlyingError: error
-                )
             default:
                 // Otherwise continue with next event
                 continue
